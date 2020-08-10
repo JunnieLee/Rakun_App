@@ -8,7 +8,6 @@ const MainHeader =  props => {
           <TouchableOpacity style={styles.Search}>
               <Image
                   source={require('../assets/icons/search.png')}
-                  onPress={ ()=>{} }
               />
           </TouchableOpacity>
       </View>

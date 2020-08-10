@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Modal, Button, Image, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, Modal, Button, Image, TouchableOpacity, SafeAreaView} from 'react-native';
 import SearchPage from './SearchPage';
+import TopBanner from "../../components/TopBanner";
 
 
 export default class MainPage extends Component {
@@ -10,11 +11,21 @@ export default class MainPage extends Component {
     render() {
         return (
             <View style = {styles.container}>
+                <TopBanner/>
+                <View style ={styles.header}>
+                    <Text style ={styles.headerTitle}>당신을 위한</Text>
+                    <TouchableOpacity style={styles.Search} onPress = {() => {this.setState({ isVisible: true})}}>
+                        <Image
+                            source={require('../.././assets/icons/search.png')}
+                        />
+                    </TouchableOpacity>
+                </View>
+
                 <Text style = {styles.bigletter}>This is definately the main page</Text>
-                <Modal animationType = {"slide"} transparent = {false}
-                       visible = {this.state.isVisible} >
+
+                <Modal animationType = {"none"} transparent = {false} visible = {this.state.isVisible} statusBarTranslucent={true}>
                     {/*All views of Modal*/}
-                    {/*Animation can be slide, slide, none*/}
+                    <SafeAreaView style={{ flex: 1 }}>
                     <View style = {styles.modal}>
                         <TouchableOpacity onPress={ ()=>{ this.setState({ isVisible:!this.state.isVisible}) } }>
                             <Image
@@ -25,12 +36,10 @@ export default class MainPage extends Component {
                         {/* Show Search Page */}
                         <SearchPage />
                     </View>
+                    </SafeAreaView>
                 </Modal>
                 {/*Button will change state to true and view will re-render*/}
-                <Button
-                    title="Click To Start Searching"
-                    onPress = {() => {this.setState({ isVisible: true})}}
-                />
+
             </View>
         );
     }
@@ -40,8 +49,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#ecf0f1',
-        marginTop:30,
+        backgroundColor: 'white',
         marginBottom:30
     },
     modal: {
@@ -60,10 +68,37 @@ const styles = StyleSheet.create({
         marginBottom: 100
     },
     closeTab : {
-        width: 25,
-        height: 28,
+        width: 40,
+        height: 44,
         flexDirection: 'row',
+        alignItems: 'flex-start',
+        marginTop:30,
+        paddingLeft:30
+    },
+    header: {
+        width: '100%',
+        height: 90,
+        paddingTop: 25,
+        backgroundColor: 'white',
+        flexDirection: 'row'
+    },
+    headerTitle: {
+        width: '90%',
+        color: 'black',
+        fontSize: 26,
+        height: 36,
+        paddingLeft: 15,
+        fontFamily: "NotoSansCJKkr",
+        fontWeight: "100",
+        fontStyle: "normal",
+        lineHeight: 36,
+        letterSpacing: 0,
         alignItems: 'flex-start'
+    },
+    Search: {
+        width: 22,
+        height: 18,
+        alignItems: 'flex-end'
     }
 });
 

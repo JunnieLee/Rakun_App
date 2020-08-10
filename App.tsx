@@ -83,8 +83,6 @@ const App = () => {
       <StatusBar barStyle="dark-content" backgroundColor={'transparent'} translucent={true}/>
       <SafeAreaView style={{ flex: 1 }}>
 <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
-    <TopBanner />
-      <MainHeader title="당신을 위한"/>
       <MainPage/>
 <View style={styles.body}>
       <View style={styles.sectionContainer}>
