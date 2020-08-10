@@ -1,10 +1,16 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Button, TouchableOpacity, Image } from 'react-native';
 
 const MainHeader =  props => {
     return (
       <View style ={styles.header}>
           <Text style ={styles.headerTitle}>{props.title}</Text>
+          <TouchableOpacity style={styles.Search}>
+              <Image
+                  source={require('../assets/icons/search.png')}
+                  onPress={ ()=>{} }
+              />
+          </TouchableOpacity>
       </View>
     );
 }
@@ -15,10 +21,10 @@ const styles = StyleSheet.create({
         height: 90,
         paddingTop: 36,
         backgroundColor: 'white',
-        alignItems: 'flex-start'
+        flexDirection: 'row'
     },
     headerTitle: {
-        width: '80%',
+        width: '90%',
         color: 'black',
         fontSize: 26,
         height: 36,
@@ -27,7 +33,13 @@ const styles = StyleSheet.create({
         fontWeight: "100",
         fontStyle: "normal",
         lineHeight: 36,
-        letterSpacing: 0
+        letterSpacing: 0,
+        alignItems: 'flex-start'
+    },
+    Search: {
+        width: 22,
+        height: 18,
+        alignItems: 'flex-end'
     }
 });
 

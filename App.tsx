@@ -48,6 +48,7 @@ import {
 
 import MainHeader from './MyApp/components/MainHeader';
 import TopBanner from './MyApp/components/TopBanner';
+import MainPage from './MyApp/screens/Main/MainPage';
 
 declare const global: {HermesInternal: null | {}};
 
@@ -84,15 +85,16 @@ const App = () => {
 <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
     <TopBanner />
       <MainHeader title="당신을 위한"/>
-
+      <MainPage/>
 <View style={styles.body}>
       <View style={styles.sectionContainer}>
       <Text style={styles.sectionTitle}>Step One</Text>
-  <Text style={styles.sectionDescription}>
-      Edit <Text style={styles.highlight}>App.tsx</Text> to change
-  this screen and then come back to see your edits.
-  </Text>
-  </View>
+      <Text style={styles.sectionDescription}>
+          Edit
+            <Text style={styles.highlight}>App.tsx</Text>
+          to change this screen and then come back to see your edits.
+      </Text>
+      </View>
   <View style={styles.sectionContainer}>
       <Text style={styles.sectionTitle}>See Your Changes</Text>
   <Text style={styles.sectionDescription}>
@@ -111,7 +113,6 @@ const App = () => {
       Read the docs to discover what to do next:
       </Text>
   </View>
-  <LearnMoreLinks />
   </View>
   </ScrollView>
   </SafeAreaView>
