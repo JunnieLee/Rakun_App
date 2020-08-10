@@ -81,17 +81,10 @@ const App = () => {
       <>
       <StatusBar barStyle="dark-content" backgroundColor={'transparent'} translucent={true}/>
       <SafeAreaView style={{ flex: 1 }}>
-<ScrollView
-  contentInsetAdjustmentBehavior="automatic"
-  style={styles.scrollView}>
-    <Header />
+<ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
     <TopBanner />
       <MainHeader title="당신을 위한"/>
-      {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-        <Text style={styles.footer}>Engine: Hermes</Text>
-  </View>
-)}
+
 <View style={styles.body}>
       <View style={styles.sectionContainer}>
       <Text style={styles.sectionTitle}>Step One</Text>
