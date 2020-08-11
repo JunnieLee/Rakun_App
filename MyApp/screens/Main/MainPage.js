@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Modal, Button, Image, TouchableOpacity, SafeAreaView} from 'react-native';
+import {View, Text, StyleSheet, Modal, Button, Image, TouchableOpacity, SafeAreaView, ScrollView} from 'react-native';
 import SearchPage from './SearchPage';
 import TopBanner from "../../components/TopBanner";
-
+import GenreSideBar from "../../components/NavBars/GenreSideBar";
+import RecommendationList from "../../containers/RecommendationList";
 
 export default class MainPage extends Component {
     state = {
@@ -21,7 +22,18 @@ export default class MainPage extends Component {
                     </TouchableOpacity>
                 </View>
 
+                {/* Genre and Recommendation Contents */}
+
+                <View style={styles.mainContent}>
+                    <GenreSideBar style={{ width: '27%'}}/>
+                    {/* Side Bar - Genre  : width 27% */}
+                    {/* - RecommendationList - Item List Scroll View : width 73 % */}
+                    <RecommendationList style={{ width: '73%'}}/>
+                </View>
+
                 <Text style = {styles.bigletter}>This is definately the main page</Text>
+
+
 
                 <Modal animationType = {"none"} transparent = {false} visible = {this.state.isVisible} statusBarTranslucent={true}>
                     {/*All views of Modal*/}
@@ -99,6 +111,10 @@ const styles = StyleSheet.create({
         width: 22,
         height: 18,
         alignItems: 'flex-end'
+    },
+    mainContent: {
+        flexDirection: 'row',
+        alignItems: 'flex-start'
     }
 });
 

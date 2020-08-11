@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image} from 'react-native';
 import { Input } from 'react-native-elements';
-import {Colors} from "react-native/Libraries/NewAppScreen";
+import styled from 'styled-components';
 
 
 const SearchPage =  props => {
+
+    const [searchKeyword] = useState('');
+
     return (
         <View style={styles.screen}>
             <Input
@@ -76,5 +79,14 @@ const styles = StyleSheet.create({
         marginBottom: 5
     }
 });
+
+/*
+const HoverText = styled.p`
+	background-color: white;
+	:hover {
+		background-color: gray;
+		cursor: pointer;
+`
+*/
 
 export default SearchPage;

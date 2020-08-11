@@ -49,6 +49,7 @@ import {
 import MainHeader from './MyApp/components/MainHeader';
 import TopBanner from './MyApp/components/TopBanner';
 import MainPage from './MyApp/screens/Main/MainPage';
+import MainBottomTab from './MyApp/components/NavBars/MainBottomTab';
 
 declare const global: {HermesInternal: null | {}};
 
@@ -84,6 +85,7 @@ const App = () => {
       <SafeAreaView style={{ flex: 1 }}>
 <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
       <MainPage/>
+      <MainBottomTab/>
 <View style={styles.body}>
       <View style={styles.sectionContainer}>
       <Text style={styles.sectionTitle}>Step One</Text>
