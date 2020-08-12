@@ -35,7 +35,7 @@ export default class MainPage extends Component {
 
 
 
-                <Modal animationType = {"none"} transparent = {false} visible = {this.state.isVisible} statusBarTranslucent={true}>
+                <Modal animationType = {"slide"} transparent = {false} visible = {this.state.isVisible} statusBarTranslucent={true}>
                     {/*All views of Modal*/}
                     <SafeAreaView style={{ flex: 1 }}>
                     <View style = {styles.modal}>

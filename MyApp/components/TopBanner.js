@@ -17,7 +17,10 @@ export default class TopBanner extends React.Component {
     renderPage(image, index) {
         return (
             <View key={index}>
-                <Image style={{ width: BannerWidth, height: BannerHeight, resizeMode:'contain' }} source={{ uri: image }} />
+                <Image style={{ width: BannerWidth , height: BannerHeight }} source={{ uri: image }} />
+                {/*
+                <Image style={{ width: BannerWidth , height: BannerHeight, resizeMode:'contain' }} source={{ uri: image }} />
+                */}
             </View>
         );
     }
@@ -30,7 +33,7 @@ export default class TopBanner extends React.Component {
                     autoplayTimeout={3000}
                     loop
                     index={0}
-                    pageSize={BannerWidth}
+                    pageSize= {BannerWidth}
                     useNativeDriver={true}
                 >
                     {images.map((image, index) => this.renderPage(image, index))}
