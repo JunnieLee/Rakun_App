@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Modal, Button, Image, TouchableOpacity, SafeAreaView, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, Modal, FlatList, Image, TouchableOpacity, SafeAreaView, ScrollView} from 'react-native';
+
+import StickyParallaxHeader from 'react-native-sticky-parallax-header';
+import StickyHeaderFooterScrollView from 'react-native-sticky-header-footer-scroll-view';
+
 import SearchPage from './SearchPage';
 import TopBanner from "../../components/TopBanner";
 import GenreSideBar from "../../components/NavBars/GenreSideBar";
@@ -9,20 +13,24 @@ export default class MainPage extends Component {
     state = {
         isVisible: false, //state of modal default false
     }
+
+    fixedHeader = (
+        <View style ={styles.header}>
+            <Text style ={styles.headerTitle}>당신을 위한</Text>
+            <TouchableOpacity style={styles.Search} onPress = {() => {this.setState({ isVisible: true})}}>
+                <Image
+                    source={require('../.././assets/icons/search.png')}
+                />
+            </TouchableOpacity>
+        </View>
+    );
+
     render() {
         return (
             <View style = {styles.container}>
-                <TopBanner/>
-                <View style ={styles.header}>
-                    <Text style ={styles.headerTitle}>당신을 위한</Text>
-                    <TouchableOpacity style={styles.Search} onPress = {() => {this.setState({ isVisible: true})}}>
-                        <Image
-                            source={require('../.././assets/icons/search.png')}
-                        />
-                    </TouchableOpacity>
-                </View>
 
-                {/* Genre and Recommendation Contents */}
+                <TopBanner/>
+                {this.fixedHeader}
 
                 <View style={styles.mainContent}>
                     <GenreSideBar style={{ width: '27%'}}/>
@@ -31,9 +39,7 @@ export default class MainPage extends Component {
                     <RecommendationList style={{ width: '73%'}}/>
                 </View>
 
-                <Text style = {styles.bigletter}>This is definately the main page</Text>
-
-
+                <Text style = {styles.bigletter}>This is end of the main page</Text>
 
                 <Modal animationType = {"slide"} transparent = {false} visible = {this.state.isVisible} statusBarTranslucent={true}>
                     {/*All views of Modal*/}
@@ -62,7 +68,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'white',
-        marginBottom:30
+        paddingBottom:10
     },
     modal: {
         flex: 1,
@@ -77,7 +83,7 @@ const styles = StyleSheet.create({
     bigletter: {
         fontSize : 20,
         margin: 20,
-        marginBottom: 100
+        marginBottom: 10,
     },
     closeTab : {
         width: 40,

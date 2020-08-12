@@ -2,8 +2,12 @@ import * as React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import {inspect} from "util";
-// import { MaterialCommunityIcons } from '@expo/vector-icons';
+// import {inspect} from "util";
+
+import Home from '../.././assets/icons/drawable/icon_home.svg';
+import Magazine from '../.././assets/icons/drawable/icon_magazine.svg';
+import MyRec from '../.././assets/icons/drawable/icon_myrec.svg';
+import Rakun from '../.././assets/icons/drawable/icon_myrakun.svg';
 
 function Feed() {
     return (
@@ -21,6 +25,14 @@ function Profile() {
     );
 }
 
+function MyRecords(){
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <Text>내 관람!</Text>
+        </View>
+    );
+}
+
 function Notifications() {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -33,7 +45,10 @@ const Tab = createBottomTabNavigator();
 
 function MyTabs() {
     return (
+        <View style={{ paddingVertical: 10, backgroundColor: 'white' }}>
+
         <Tab.Navigator
+            // style = {{ paddingVertical: 20 }}
             initialRouteName="Feed"
             tabBarOptions={{
                 activeTintColor: '#a98c66',
@@ -43,39 +58,47 @@ function MyTabs() {
                 name="Feed"
                 component={Feed}
                 options={{
-                    tabBarLabel: 'Home',
-                    /*
+                    tabBarLabel: '홈',
                     tabBarIcon: ({ color, size }) => (
-                         <MaterialCommunityIcons name="home" color={color} size={size} />
+                         <Home fill={color} size={size} />
                     ),
-                    */
+
                 }}
             />
             <Tab.Screen
                 name="Notifications"
                 component={Notifications}
                 options={{
-                    tabBarLabel: 'Updates',
-                    /*
+                    tabBarLabel: '매거진',
                     tabBarIcon: ({ color, size }) => (
-                      //  <MaterialCommunityIcons name="bell" color={color} size={size} />
+                      <Magazine fill={ color } size={size} />
                     ),
-                    */
+
                 }}
             />
             <Tab.Screen
-                name="Profile"
+                name="MyRecords"
+                component={MyRecords}
+                options={{
+                    tabBarLabel: '내관람',
+                    tabBarIcon: ({ color, size }) => (
+                        <MyRec fill={color} size={size} />
+                    ),
+
+                }}
+            />
+            <Tab.Screen
+                name="My"
                 component={Profile}
                 options={{
-                    tabBarLabel: 'Profile',
-                    /*
+                    tabBarLabel: 'My',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="account" color={color} size={size} />
+                        <Rakun fill={color} size={size} />
                     ),
-                    */
                 }}
             />
         </Tab.Navigator>
+            </View>
     );
 }
 
