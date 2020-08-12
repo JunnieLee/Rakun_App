@@ -3,23 +3,29 @@ import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 
 const GenreSideBar =  props => {
 
+
     const [TextStyle, setTextStyle] = useState(styles.GenreTextPlain);
     const onPress = () => setTextStyle(TextStyle =>
                                         TextStyle == styles.GenreTextPlain?
                                             styles.GenreTextFocused : styles.GenreTextPlain);
 
-    var MenuItems_name = ['뮤지컬', '연극', '전시', '박물관', '무용', '오페라', '오케스트라'];
-    var MenuItems_activated= [1,0,0,0,0,0,0];
-    var MenuItems = [];
 
+    const [ActivatedIdx, setActivatedIdx] = useState(0);
+
+    var MenuItems_name = ['뮤지컬', '연극', '전시', '박물관', '무용', '오페라', '오케스트라'];
+    var MenuItems = [];
 
     for(let i = 0; i < MenuItems_name.length; i++){
         MenuItems.push(
             <View key = {i}>
-                <TouchableOpacity style={styles.MenuItem} onPress={onPress}>
-                    <Text style={styles.GenreTextPlain}>
+                <TouchableOpacity style={styles.MenuItem}
+                                  onPress={ () => { setActivatedIdx( ActivatedIdx => (ActivatedIdx =i) ) }}>
+                    <Text style={ (i==ActivatedIdx) ? styles.GenreTextFocused : styles.GenreTextPlain} >
                         {MenuItems_name[i]}
                     </Text>
+                    {/* underline for focused element */}
+                    {(i==ActivatedIdx) ?
+                        <View style={styles.underlineRectangle} /> : null }
                 </TouchableOpacity>
 
             </View>
@@ -40,6 +46,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start'
     },
     MenuItem: {
+        marginTop:5,
         marginBottom:20
     },
     GenreTextPlain: {
@@ -52,7 +59,7 @@ const styles = StyleSheet.create({
         color: "#8e8e8e",
     },
     GenreTextFocused: {
-        width: 34,
+        width: 90,
         height: 27,
         fontFamily: "NotoSansCJKkr",
         fontSize: 18,
@@ -61,6 +68,11 @@ const styles = StyleSheet.create({
         letterSpacing: 0,
         color: "#000000",
         borderBottomColor: '#4d5c6f',
+    },
+    underlineRectangle : {
+        width: 55,
+        height: 4,
+        backgroundColor: '#4d5c6f'
     }
 });
 

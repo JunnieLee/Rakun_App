@@ -4,51 +4,54 @@ import { Rating }from 'react-native-ratings';
 import FilledHeart from '../.././assets/icons/drawable/btn_like_fill.svg';
 import EmptyHeart from '../.././assets/icons/drawable/btn_like.svg';
 
+import FilledStar from '../.././assets/icons/drawable/icon_full_star.svg';
+import EmptyStar from '../.././assets/icons/drawable/icon_empty_star.svg';
+
 const RecommendationItem = (props) => {
 
-    const [heartFilled, setheartFilled] = useState(false);
+    var ratings = [ ];
+
+    for (var i=0; i < props.rating ; i++){
+        ratings.push(
+            <FilledStar style={{ size: 13 }}/>
+        );
+    }
+    for (var i=0; i < (5-props.rating) ; i++){
+        ratings.push(
+            <EmptyStar style={{ size: 13 }}/>
+        );
+    }
+
+
+    const [heartFilled, setheartFilled] = useState(false); // for heart
+    // const [s, sets] = useState(props.rating); // for star
 
     return (
         <View style={styles.product}>
             <View style={styles.imageContainer}>
                 <Image style={styles.image}
-                       source={{ uri: 'https://user-images.githubusercontent.com/33515577/89978689-12ba3b80-dca9-11ea-87f2-d8c919104ff8.png' }}
+                       source={{ uri: props.image }}
                      />
-                {/* source={{ uri: props.image }}*/}
             </View>
             <View style={styles.details}>
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{props.title} 오페라의 유령 </Text>
-                    <TouchableOpacity style={{ size:22, alignItems: 'flex-end'}}
+                    <Text style={styles.title}>{props.title}</Text>
+                    <TouchableOpacity style={{ size:22, alignItems: 'flex-end', marginVertical: 4}}
                                       onPress = {() => { setheartFilled(heartFilled => !heartFilled) }} >
                         {heartFilled? <FilledHeart /> : <EmptyHeart />}
                     </TouchableOpacity>
                 </View>
-
-                <Text style={styles.date}>{props.date} 2020.03.14~2020.08.08 </Text>
-                <Rating
-                    // ratingColor='red'
-                    type='custom'
-                    ratingBackgroundColor='white'
-                    ratingColor= '#a98c66'
-                    imageSize={13}
-                    style={{ paddingVertical: 10, alignItems: 'flex-start' }}
-                    readonly={true}
-                />
+                <Text style={styles.date}>{props.date}</Text>
+                <View style={{ flexDirection:'row', paddingVertical: 10, alignItems: 'flex-start' }}>
+                { ratings }
+                </View>
             </View>
-                {/* 별점 넣기*/}
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     product: {
-        // shadowColor: 'white',
-        // shadowOpacity: 0.26,
-        // shadowOffset: { width: 0, height: 2 },
-        // shadowRadius: 8,
-        // elevation: 5,
-        // borderRadius: 10,
         backgroundColor: 'white',
         height: 330,
         // margin: 20
