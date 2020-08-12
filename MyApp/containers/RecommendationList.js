@@ -5,6 +5,8 @@ import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet, Text,} from 'react-native';
 //import all the components we needed
 
+import RecommendationItem from '.././components/Items/RecommendationItem';
+
 export default class RecommendationList extends Component {
     constructor() {
         super();
@@ -25,6 +27,8 @@ export default class RecommendationList extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView>
+                    <RecommendationItem />
+                    <RecommendationItem />
                     {/*Loop of JS which is like foreach loop*/}
                     {this.items.map((item, key) => (
                         //key is the index of the array
