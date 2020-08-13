@@ -1,31 +1,35 @@
 import * as React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import {inspect} from "util";
 
-import Home from '../.././assets/icons/drawable/icon_home.svg';
-import Magazine from '../.././assets/icons/drawable/icon_magazine.svg';
-import MyRec from '../.././assets/icons/drawable/icon_myrec.svg';
-import Rakun from '../.././assets/icons/drawable/icon_myrakun.svg';
+import UnFocusedHome from '../.././assets/icons/drawable/icon_home.svg';
+import UnFocusedMagazine from '../.././assets/icons/drawable/icon_magazine.svg';
+import UnFocusedMyRec from '../.././assets/icons/drawable/icon_myrec.svg';
+import UnFocusedRakun from '../.././assets/icons/drawable/icon_myrakun.svg';
 
-function Feed() {
+import FocusedHome from '../.././assets/icons/drawable/icon_home_focused.svg';
+import FocusedMagazine from '../.././assets/icons/drawable/icon_magazine_focused.svg';
+import FocusedMyRec from '../.././assets/icons/drawable/icon_myrec_focused.svg';
+import FocusedRakun from '../.././assets/icons/drawable/icon_myrakun_focused.svg';
+
+
+function Main() {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Feed!</Text>
+            <Text>Main Page</Text>
         </View>
     );
 }
 
-function Profile() {
+function Magazine_page() {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Profile!</Text>
+            <Text>Magazine!</Text>
         </View>
     );
 }
 
-function MyRecords(){
+function MyRecords_page(){
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text>내 관람!</Text>
@@ -33,10 +37,10 @@ function MyRecords(){
     );
 }
 
-function Notifications() {
+function My() {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Notifications!</Text>
+            <Text>My 계정설정 페이지!</Text>
         </View>
     );
 }
@@ -45,55 +49,54 @@ const Tab = createBottomTabNavigator();
 
 function MyTabs() {
     return (
-        <View style={{ paddingVertical: 10, backgroundColor: 'white' }}>
+        <View style={{ paddingVertical: 7, backgroundColor: 'white' }}>
 
         <Tab.Navigator
-            // style = {{ paddingVertical: 20 }}
-            initialRouteName="Feed"
+            style = {{ paddingVertical: 20 }}
+            initialRouteName="Main"
             tabBarOptions={{
                 activeTintColor: '#a98c66',
             }}
         >
             <Tab.Screen
-                name="Feed"
-                component={Feed}
+                name="Main"
+                component={Main}
                 options={{
                     tabBarLabel: '홈',
-                    tabBarIcon: ({ color, size }) => (
-                         <Home fill={color} size={size} />
+                    tabBarIcon: ({ color, size, focused }) => (
+                        focused? <FocusedHome/> : <UnFocusedHome/>
                     ),
-
                 }}
             />
             <Tab.Screen
-                name="Notifications"
-                component={Notifications}
+                name="Magazine_page"
+                component={Magazine_page}
                 options={{
                     tabBarLabel: '매거진',
-                    tabBarIcon: ({ color, size }) => (
-                      <Magazine fill={ color } size={size} />
+                    tabBarIcon: ({ color, size, focused }) => (
+                        focused? <FocusedMagazine/> : <UnFocusedMagazine/>
                     ),
 
                 }}
             />
             <Tab.Screen
-                name="MyRecords"
-                component={MyRecords}
+                name="MyRecords_page"
+                component={MyRecords_page}
                 options={{
                     tabBarLabel: '내관람',
-                    tabBarIcon: ({ color, size }) => (
-                        <MyRec fill={color} size={size} />
+                    tabBarIcon: ({ color, size, focused }) => (
+                        focused? <FocusedMyRec/> : <UnFocusedMyRec/>
                     ),
 
                 }}
             />
             <Tab.Screen
                 name="My"
-                component={Profile}
+                component={My}
                 options={{
                     tabBarLabel: 'My',
-                    tabBarIcon: ({ color, size }) => (
-                        <Rakun fill={color} size={size} />
+                    tabBarIcon: ({ color, size, focused }) => (
+                        focused? <FocusedRakun/> : <UnFocusedRakun/>
                     ),
                 }}
             />
