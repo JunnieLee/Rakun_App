@@ -39,8 +39,6 @@ export default class MainPage extends Component {
                     <RecommendationList style={{ width: '73%'}}/>
                 </View>
 
-                <Text style = {styles.bigletter}>This is end of the main page</Text>
-
                 <Modal animationType = {"slide"} transparent = {false} visible = {this.state.isVisible} statusBarTranslucent={true}>
                     {/*All views of Modal*/}
                     <SafeAreaView style={{ flex: 1 }}>
@@ -57,6 +55,11 @@ export default class MainPage extends Component {
                     </SafeAreaView>
                 </Modal>
                 {/*Button will change state to true and view will re-render*/}
+
+                <Text style = {styles.bigletter}>This is end of the main page</Text>
+                <View style={{ height:200, backgroundColor:'white' }}>
+                    <Text> Still gotta work on the page ..</Text>
+                </View>
 
             </View>
         );
@@ -81,6 +84,7 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     bigletter: {
+        paddingTop: 30,
         fontSize : 20,
         margin: 20,
         marginBottom: 10,

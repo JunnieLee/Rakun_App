@@ -83,13 +83,19 @@ const App = () => {
       <>
       <StatusBar barStyle="dark-content" backgroundColor={'transparent'} translucent={true}/>
       <SafeAreaView style={{ flex: 1 }}>
+          {/* Page Rendering*/}
           <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
-              <MainPage/>
-              <MainBottomTab/>
-              <View style={{ height : 100, backgroundColor: 'pink'}}>
-                  <Text style={{ marginTop : 50}}> Area saved for checking the bottom tab ! </Text>
-              </View>
+                  <MainPage/>
           </ScrollView>
+          {/* Fixed Footer Rendering*/}
+          <View style={{ position: 'absolute', bottom: 0, width:'100%'}}>
+              <MainBottomTab/>
+                <View style={{ height : 80, backgroundColor: 'pink'}}>
+                    <Text style={{ marginTop : 50}}> Area saved for checking the bottom tab ! </Text>
+                </View>
+          </View>
+
+              {/* </ScrollView> */}
       </SafeAreaView>
         </>
       </NavigationContainer>

@@ -15,7 +15,7 @@ import FocusedRakun from '../.././assets/icons/drawable/icon_myrakun_focused.svg
 
 function Main() {
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', position: 'absolute'}}>
             <Text>Main Page</Text>
         </View>
     );
@@ -49,7 +49,7 @@ const Tab = createBottomTabNavigator();
 
 function MyTabs() {
     return (
-        <View style={{ paddingVertical: 7, backgroundColor: 'white' }}>
+        <View style={{ paddingVertical: 7, backgroundColor: 'white'}}>
 
         <Tab.Navigator
             style = {{ paddingVertical: 20 }}
