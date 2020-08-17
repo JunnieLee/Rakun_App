@@ -12,6 +12,9 @@ import {
     Dimensions
 } from 'react-native';
 
+
+import StickyHeaderFooterScrollView from 'react-native-sticky-header-footer-scroll-view';
+
 import MyReviewList from "../../containers/MyReviewList";
 import JjimList from "../../containers/JjimList";
 
@@ -34,10 +37,16 @@ const MyRecPage =  props =>  {
 
     // 찜 선택 시
     var myMiniHeader_ver1 = (
-        <View style = {styles.miniHeader}>
-            <Text style={styles.titleFocused}> 찜 ({JJimNum}) </Text>
-            <Text style={styles.titleUnFocused}> 내리뷰 ({MyReviewNum}) </Text>
-            <View style={{ width: 72, height: 4, backgroundColor: '#4d5c6f' }}/>
+        <View style={{ marginVertical:10 }}>
+            <View style = {styles.miniHeader}>
+                <TouchableOpacity style={styles.miniHeaderHelper} onPress = {() => {}} >
+                    <Text style={styles.titleFocused}> 찜 ({JJimNum}) </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.miniHeaderHelper} onPress = {changeView} >
+                    <Text style={styles.titleUnFocused}> 내리뷰 ({MyReviewNum}) </Text>
+                </TouchableOpacity>
+            </View>
+            <View style={{ marginLeft: 0,width: '20%', height: 4, backgroundColor: '#4d5c6f' }}/>
         </View>
     );
 
@@ -45,8 +54,12 @@ const MyRecPage =  props =>  {
     var myMiniHeader_ver2 = (
         <View style={{ marginVertical:10 }}>
             <View style = {styles.miniHeader}>
-            <Text style={styles.titleUnFocused}> 찜 ({JJimNum}) </Text>
-            <Text style={styles.titleFocused}> 내리뷰 ({MyReviewNum}) </Text>
+                <TouchableOpacity style={styles.miniHeaderHelper} onPress = {changeView} >
+                    <Text style={styles.titleUnFocused}> 찜 ({JJimNum}) </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.miniHeaderHelper} onPress = {() => {}} >
+                    <Text style={styles.titleFocused}> 내리뷰 ({MyReviewNum}) </Text>
+                </TouchableOpacity>
             </View>
             <View style={{ marginLeft: '25%',width: '25%', height: 4, backgroundColor: '#4d5c6f' }}/>
         </View>
@@ -58,7 +71,7 @@ const MyRecPage =  props =>  {
                 <View style={styles.container}>
                     <Text style = {styles.topHeader}>내 관람</Text>
                     { (Choice==0)? myMiniHeader_ver1 : myMiniHeader_ver2 }
-                    { (Choice==0)? <JjimList /> : <MyReviewList/> }
+                    { (Choice==0)? <MyReviewList/> : <MyReviewList/> }
                 </View>
             </SafeAreaView>
         );
@@ -90,9 +103,13 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         flexDirection: 'row'
     },
+    miniHeaderHelper : {
+        width: '50%',
+        height: 21
+    },
     titleFocused : {
         // width: 72,
-        width: '50%',
+        // width: '50%',
         height: 21,
         fontFamily: "AppleSDGothicNeo",
         fontSize: 18,
@@ -103,7 +120,7 @@ const styles = StyleSheet.create({
     },
     titleUnFocused : {
         // width: 72,
-        width: '50%',
+        // width: '50%',
         height: 21,
         fontFamily: "AppleSDGothicNeo",
         fontSize: 18,
