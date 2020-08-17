@@ -28,17 +28,14 @@ export default class MainPage extends Component {
     render() {
         return (
             <View style = {styles.container}>
-
                 <TopBanner/>
                 {this.fixedHeader}
-
                 <View style={styles.mainContent}>
                     <GenreSideBar style={{ width: '27%'}}/>
                     {/* Side Bar - Genre  : width 27% */}
                     {/* - RecommendationList - Item List Scroll View : width 73 % */}
                     <RecommendationList style={{ width: '73%'}}/>
                 </View>
-
                 <Modal animationType = {"slide"} transparent = {false} visible = {this.state.isVisible} statusBarTranslucent={true}>
                     {/*All views of Modal*/}
                     <SafeAreaView style={{ flex: 1 }}>
@@ -60,7 +57,6 @@ export default class MainPage extends Component {
                 <View style={{ height:200, backgroundColor:'white' }}>
                     <Text> Still gotta work on the page ..</Text>
                 </View>
-
             </View>
         );
     }
@@ -102,7 +98,7 @@ const styles = StyleSheet.create({
         height: 90,
         paddingTop: 25,
         backgroundColor: 'white',
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     headerTitle: {
         width: '90%',

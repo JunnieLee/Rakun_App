@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, Button } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import UnFocusedHome from '../.././assets/icons/drawable/icon_home.svg';
@@ -12,34 +12,30 @@ import FocusedMagazine from '../.././assets/icons/drawable/icon_magazine_focused
 import FocusedMyRec from '../.././assets/icons/drawable/icon_myrec_focused.svg';
 import FocusedRakun from '../.././assets/icons/drawable/icon_myrakun_focused.svg';
 
+import MainPage from '../.././screens/Main/MainPage';
+import MyRec from '../.././screens/My_Rec/MyRecPage';
 
-function Main() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', position: 'absolute'}}>
-            <Text>Main Page</Text>
-        </View>
-    );
+function Main({navigation}) {
+    return ( <MainPage />);
 }
 
-function Magazine_page() {
+function Magazine_page({navigation}) {
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View >
+            <Button title='메인페이지' onPress={() => navigation.navigate('Main')}/>
             <Text>Magazine!</Text>
         </View>
     );
 }
 
-function MyRecords_page(){
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>내 관람!</Text>
-        </View>
-    );
+function MyRecords_page({navigation}){
+    return ( <MyRec/> );
 }
 
-function My() {
+function My({navigation}) {
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <View>
+            <Button title='메인페이지' onPress= {() => navigation.navigate('Main')} />
             <Text>My 계정설정 페이지!</Text>
         </View>
     );
@@ -73,7 +69,7 @@ function MyTabs() {
                 component={Magazine_page}
                 options={{
                     tabBarLabel: '매거진',
-                    tabBarIcon: ({ color, size, focused }) => (
+                    tabBarIcon: ({ color, size, focused, navigation }) => (
                         focused? <FocusedMagazine/> : <UnFocusedMagazine/>
                     ),
 
@@ -84,7 +80,7 @@ function MyTabs() {
                 component={MyRecords_page}
                 options={{
                     tabBarLabel: '내관람',
-                    tabBarIcon: ({ color, size, focused }) => (
+                    tabBarIcon: ({ color, size, focused, navigation }) => (
                         focused? <FocusedMyRec/> : <UnFocusedMyRec/>
                     ),
 
@@ -95,7 +91,7 @@ function MyTabs() {
                 component={My}
                 options={{
                     tabBarLabel: 'My',
-                    tabBarIcon: ({ color, size, focused }) => (
+                    tabBarIcon: ({ color, size, focused, navigation }) => (
                         focused? <FocusedRakun/> : <UnFocusedRakun/>
                     ),
                 }}

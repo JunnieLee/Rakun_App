@@ -56,14 +56,40 @@ const RecommendationList = (props) => {
         return (
             <View style={styles.container}>
                 <ScrollView>
+
                     { RecommendationItems }
-                    <TouchableOpacity onPress={()=>{ }}>
+                    <TouchableOpacity style={{ marginVertical:20}} onPress={()=>{ }}>
                         <View style = {styles.separatorRectangle}>
                             <Text style = {styles.separatorNameText}>
                                 {MenuItems_name[0]} 전체보기
                             </Text>
                         </View>
+                        <View style={{ height: 5, backgroundColor: 'white'}}/>
+                        <View style={{ height: 7, backgroundColor: '#4d5c6f'}}/>
                     </TouchableOpacity>
+
+                    { RecommendationItems }
+                    <TouchableOpacity style={{ marginVertical:20}} onPress={()=>{ }}>
+                        <View style = {styles.separatorRectangle}>
+                            <Text style = {styles.separatorNameText}>
+                                {MenuItems_name[1]} 전체보기
+                            </Text>
+                        </View>
+                        <View style={{ height: 5, backgroundColor: 'white'}}/>
+                        <View style={{ height: 7, backgroundColor: '#4d5c6f'}}/>
+                    </TouchableOpacity>
+
+                    { RecommendationItems }
+                    <TouchableOpacity style={{ marginVertical:20}} onPress={()=>{ }}>
+                        <View style = {styles.separatorRectangle}>
+                            <Text style = {styles.separatorNameText}>
+                                {MenuItems_name[2]} 전체보기
+                            </Text>
+                        </View>
+                        <View style={{ height: 5, backgroundColor: 'white'}}/>
+                        <View style={{ height: 7, backgroundColor: '#4d5c6f'}}/>
+                    </TouchableOpacity>
+
                 </ScrollView>
             </View>
         );
@@ -88,7 +114,7 @@ const styles = StyleSheet.create({
     separatorRectangle : {
         width: '100%',
         height: 40,
-        backgroundColor: '#4d5c6f'
+        backgroundColor: '#4d5c6f',
     },
     separatorNameText : {
         width: 260,

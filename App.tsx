@@ -50,6 +50,7 @@ import MainHeader from './MyApp/components/MainHeader';
 import TopBanner from './MyApp/components/TopBanner';
 import MainPage from './MyApp/screens/Main/MainPage';
 import MainBottomTab from './MyApp/components/NavBars/MainBottomTab';
+import MyRecPage from "./MyApp/screens/My_Rec/MyRecPage";
 
 declare const global: {HermesInternal: null | {}};
 
@@ -85,7 +86,8 @@ const App = () => {
       <SafeAreaView style={{ flex: 1 }}>
           {/* Page Rendering*/}
           <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
-                  <MainPage/>
+              {/* <MainPage/> */}
+              <MyRecPage/>
           </ScrollView>
           {/* Fixed Footer Rendering*/}
           <View style={{ position: 'absolute', bottom: 0, width:'100%'}}>
@@ -105,7 +107,7 @@ const App = () => {
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: Colors.lighter,
+    backgroundColor: 'white'// Colors.lighter,
   },
   engine: {
     position: 'absolute',
