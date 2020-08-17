@@ -32,8 +32,9 @@ const MyRecPage =  props =>  {
 
     // 찜 갯수와 리뷰 갯수는 나중엔 이렇게 state으로 처리하는게 아니라
     // 직접 DB로부터 사용자 정보 가지고 와서 보여줘야..
-    const [JJimNum, setJJimNum] = useState(0); // Choice == 0 ? 찜 : 내리뷰
-    const [MyReviewNum, setMyReviewNum] = useState(0); // Choice == 0 ? 찜 : 내리뷰
+    const [JJimNum, setJJimNum] = useState(3); // Choice == 0 ? 찜 : 내리뷰
+    const [MyReviewNum, setMyReviewNum] = useState(5); // Choice == 0 ? 찜 : 내리뷰
+
 
     // 찜 선택 시
     var myMiniHeader_ver1 = (
@@ -49,6 +50,7 @@ const MyRecPage =  props =>  {
             <View style={{ marginLeft: 0,width: '20%', height: 4, backgroundColor: '#4d5c6f' }}/>
         </View>
     );
+
 
     // 내 리뷰 선택 시
     var myMiniHeader_ver2 = (
@@ -71,7 +73,7 @@ const MyRecPage =  props =>  {
                 <View style={styles.container}>
                     <Text style = {styles.topHeader}>내 관람</Text>
                     { (Choice==0)? myMiniHeader_ver1 : myMiniHeader_ver2 }
-                    { (Choice==0)? <MyReviewList/> : <MyReviewList/> }
+                    { (Choice==0)? <JjimList/> : <MyReviewList/> }
                 </View>
             </SafeAreaView>
         );
@@ -85,7 +87,7 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
         backgroundColor: 'white',
         marginVertical: '10%',
-        marginHorizontal: '3%'
+        marginHorizontal: '4%'
         // marginLeft: '5%'
     },
     topHeader: {
