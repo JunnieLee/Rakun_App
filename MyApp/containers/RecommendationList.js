@@ -36,7 +36,7 @@ var RecommendationItemRating= [
 
 var MenuItems_name = ['뮤지컬', '연극', '전시', '박물관', '무용', '오페라', '오케스트라'];
 
-const RecommendationList = (props) => {
+const RecommendationList = ({props, navigation}) => {
 
     var RecommendationItems = [];
 
@@ -58,7 +58,7 @@ const RecommendationList = (props) => {
                 <ScrollView>
 
                     { RecommendationItems }
-                    <TouchableOpacity style={{ marginVertical:20}} onPress={()=>{ }}>
+                    <TouchableOpacity style={{ marginVertical:20}} onPress={()=>{navigation.navigate('Details') }}>
                         <View style = {styles.separatorRectangle}>
                             <Text style = {styles.separatorNameText}>
                                 {MenuItems_name[0]} 전체보기

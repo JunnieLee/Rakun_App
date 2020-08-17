@@ -51,6 +51,7 @@ import TopBanner from './MyApp/components/TopBanner';
 import MainPage from './MyApp/screens/Main/MainPage';
 import MainBottomTab from './MyApp/components/NavBars/MainBottomTab';
 import MyRecPage from "./MyApp/screens/My_Rec/MyRecPage";
+import GenreDetailPage from "./MyApp/screens/Details/GenreDetailPage";
 
 declare const global: {HermesInternal: null | {}};
 
@@ -80,15 +81,19 @@ const client = new ApolloClient({
 const App = () => {
   return (
       <ApolloProvider client={client}>
-      <NavigationContainer>
-      <>
+        <NavigationContainer>
       <StatusBar barStyle="dark-content" backgroundColor={'transparent'} translucent={true}/>
       <SafeAreaView style={{ flex: 1 }}>
           {/* Page Rendering*/}
-          <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
-              {/* <MainPage/> */}
-              <MyRecPage/>
-          </ScrollView>
+
+         <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
+              {/* <MyRecPage/> */}
+              {/*<MainPage/>*/}
+
+              <GenreDetailPage/>
+
+        </ScrollView>
+
           {/* Fixed Footer Rendering*/}
           <View style={{ position: 'absolute', bottom: 0, width:'100%'}}>
               <MainBottomTab/>
@@ -97,10 +102,8 @@ const App = () => {
                 </View>
           </View>
 
-              {/* </ScrollView> */}
       </SafeAreaView>
-        </>
-      </NavigationContainer>
+        </NavigationContainer>
       </ApolloProvider>
       );
 };

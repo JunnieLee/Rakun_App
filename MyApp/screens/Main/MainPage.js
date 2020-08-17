@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {View, Text, StyleSheet, Modal, FlatList, Image, TouchableOpacity, SafeAreaView, ScrollView} from 'react-native';
+import React, {Component, useState} from 'react';
+import {View, Text, StyleSheet, Modal, Button, Image, TouchableOpacity, SafeAreaView, ScrollView} from 'react-native';
 
 import StickyParallaxHeader from 'react-native-sticky-parallax-header';
 import StickyHeaderFooterScrollView from 'react-native-sticky-header-footer-scroll-view';
@@ -9,12 +9,27 @@ import TopBanner from "../../components/TopBanner";
 import GenreSideBar from "../../components/NavBars/GenreSideBar";
 import RecommendationList from "../../containers/RecommendationList";
 
-export default class MainPage extends Component {
-    state = {
-        isVisible: false, //state of modal default false
-    }
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-    fixedHeader = (
+import GenreDetailPage from '.././Details/GenreDetailPage';
+
+function GenreDetailScreen({ navigation }) {
+    return (
+        <View>
+            <Button title="Go Back" onPress={() => navigation.goBack()}/>
+            <GenreDetailPage/>
+        </View>
+    );
+}
+
+const MainPageHelper = ({props, navigation}) => {
+
+    const [isVisible, setisVisible] = useState(false);
+
+    const openSearchView = () => setisVisible(isVisible => isVisible = (!isVisible));
+
+    var fixedHeader = (
         <View style ={styles.header}>
             <Text style ={styles.headerTitle}>당신을 위한</Text>
             <TouchableOpacity style={styles.Search} onPress = {() => {this.setState({ isVisible: true})}}>
@@ -25,22 +40,22 @@ export default class MainPage extends Component {
         </View>
     );
 
-    render() {
+
         return (
             <View style = {styles.container}>
                 <TopBanner/>
-                {this.fixedHeader}
+                {fixedHeader}
                 <View style={styles.mainContent}>
                     <GenreSideBar style={{ width: '27%'}}/>
                     {/* Side Bar - Genre  : width 27% */}
                     {/* - RecommendationList - Item List Scroll View : width 73 % */}
-                    <RecommendationList style={{ width: '73%'}}/>
+                    <RecommendationList style={{ width: '73%'}} navigation={navigation}/>
                 </View>
-                <Modal animationType = {"slide"} transparent = {false} visible = {this.state.isVisible} statusBarTranslucent={true}>
+                <Modal animationType = {"slide"} transparent = {false} visible = {isVisible} statusBarTranslucent={true}>
                     {/*All views of Modal*/}
                     <SafeAreaView style={{ flex: 1 }}>
                     <View style = {styles.modal}>
-                        <TouchableOpacity onPress={ ()=>{ this.setState({ isVisible:!this.state.isVisible}) } }>
+                        <TouchableOpacity onPress={ openSearchView }>
                             <Image
                                 source={require('../.././assets/icons/close.png')}
                                 style={styles.closeTab}
@@ -59,8 +74,8 @@ export default class MainPage extends Component {
                 </View>
             </View>
         );
-    }
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -124,6 +139,22 @@ const styles = StyleSheet.create({
     }
 });
 
+
+const Stack = createStackNavigator();
+
+function MainPage() {
+    return (
+
+        <Stack.Navigator initialRouteName="Home">
+                <Stack.Screen name="Home" component={MainPageHelper} />
+                <Stack.Screen name="Details" component={GenreDetailScreen} />
+            </Stack.Navigator>
+
+    );
+}
+
+
+export default MainPageHelper;
 
 //////////////////////////////////
 /*
