@@ -32,7 +32,7 @@ const MainPageHelper = ({props, navigation}) => {
     var fixedHeader = (
         <View style ={styles.header}>
             <Text style ={styles.headerTitle}>당신을 위한</Text>
-            <TouchableOpacity style={styles.Search} onPress = {() => {this.setState({ isVisible: true})}}>
+            <TouchableOpacity style={styles.Search} onPress = {openSearchView} >
                 <Image
                     source={require('../.././assets/icons/search.png')}
                 />

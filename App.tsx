@@ -52,6 +52,8 @@ import MainPage from './MyApp/screens/Main/MainPage';
 import MainBottomTab from './MyApp/components/NavBars/MainBottomTab';
 import MyRecPage from "./MyApp/screens/My_Rec/MyRecPage";
 import GenreDetailPage from "./MyApp/screens/Details/GenreDetailPage";
+import My_BasicPage from './MyApp/screens/MY/My_BasicPage';
+
 
 declare const global: {HermesInternal: null | {}};
 
@@ -87,10 +89,10 @@ const App = () => {
           {/* Page Rendering*/}
 
          <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
-              {/* <MyRecPage/> */}
-              {/*<MainPage/>*/}
-
-              <GenreDetailPage/>
+           {/*<MyRecPage/>*/}
+           {/*<MainPage/>*/}
+            <My_BasicPage />
+           {/* <GenreDetailPage/>*/}
 
         </ScrollView>
 
