@@ -1,24 +1,39 @@
 import React, { useState } from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions} from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    Image,
+    TouchableOpacity,
+    Dimensions,
+    Modal,
+    SafeAreaView, ScrollView
+} from 'react-native';
+
+import My_EditProfilePage from './My_EditProfilePage';
 
 const BannerWidth = Dimensions.get('window').width;
 
-
+const profileImage = 'https://user-images.githubusercontent.com/33515577/90604014-26304e00-e237-11ea-8aa8-304f67730bc8.png';
+var nickname = '쭌쭌';
 
 const MY_BasicPage =  props => {
+
+    const [isVisible, setisVisible] = useState(false);
+    const openEditView = () => setisVisible(isVisible => isVisible = (!isVisible));
 
     var top = (
         <View style={{flexDirection:'row'}}>
 
             <View style={styles.textContainer}>
                 <Text style={styles.WelcomeText}>문화를 즐기시는</Text>
-                <Text style={styles.WelcomeText}>찐찐님!</Text>
+                <Text style={styles.WelcomeText}>{nickname}님!</Text>
             </View>
 
             <View style={styles.profileContainer}>
-                <Image source={{uri:'https://user-images.githubusercontent.com/33515577/90604014-26304e00-e237-11ea-8aa8-304f67730bc8.png'}}
+                <Image source={{uri:profileImage}}
                        style={{ width: BannerWidth*(1/5), height: BannerWidth*(1/5), borderRadius: 150/2}}/>
-                <TouchableOpacity onPress={()=>{}}>
+                <TouchableOpacity onPress={openEditView}>
                     <Image
                         source={require('../../assets/icons/edit_profile.png')} // ../.././assets/icons/close.png
                         style={styles.editButton}
@@ -67,6 +82,31 @@ const MY_BasicPage =  props => {
             {top}
             {middle}
             {bottom}
+
+
+            <Modal animationType = {"slide"} transparent = {false} visible = {isVisible} statusBarTranslucent={true}>
+                {/*All views of Modal*/}
+                <SafeAreaView style={{ flex: 1 }}>
+                    <View style = {styles.modal}>
+                        <TouchableOpacity onPress={ openEditView }>
+                            <Image
+                                source={require('../../assets/icons/close.png')}
+                                style={styles.closeTab}
+                            />
+                        </TouchableOpacity>
+                        {/* Show Edit Page */}
+
+                        
+                            <My_EditProfilePage
+                                profileImage = {profileImage}
+                                nickname={nickname}
+                            />
+
+
+                    </View>
+                </SafeAreaView>
+            </Modal>
+
         </View>
     );
 }
@@ -130,8 +170,25 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         letterSpacing: 0,
         color: "#7d7d7d"
-    }
+    },
+    modal: {
+        flex: 1,
+        // alignItems: 'center',
+        backgroundColor: 'white',
+        marginLeft: '5%',
+        marginTop: '10%'
+    },
+    closeTab : {
 
+        // width: 40,
+        // height: 44,
+        width: BannerWidth*(1/10),
+        height: BannerWidth*(1/10),
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        // marginTop:30,
+        // paddingLeft:30
+    },
 });
 
 
