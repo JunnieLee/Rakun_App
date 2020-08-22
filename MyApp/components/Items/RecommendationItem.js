@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
-import { Rating }from 'react-native-ratings';
 import FilledHeart from '../.././assets/icons/drawable/btn_like_fill.svg';
 import EmptyHeart from '../.././assets/icons/drawable/btn_like.svg';
 
@@ -23,19 +22,32 @@ const RecommendationItem = (props) => {
     }
 
 
+
     const [heartFilled, setheartFilled] = useState(false); // for heart
     // const [s, sets] = useState(props.rating); // for star
 
     return (
         <View style={styles.product}>
-            <View style={styles.imageContainer}>
-                <Image style={styles.image}
-                       source={{ uri: props.image }}
-                     />
-            </View>
+                <View style={styles.imageContainer}>
+                    <TouchableOpacity onPress={()=>{
+                        props.navigation.navigate('EventDetail', {
+                            image: props.image,
+                            rating:props.rating,
+                            title: props.title,
+                            date: props.date // 나중엔 해당 item의 key값만 받아오면 되겠지!
+                        }
+                            )
+                    }}>
+                    <Image style={styles.image}
+                           source={{ uri: props.image }}
+                         />
+                    </TouchableOpacity>
+                </View>
             <View style={styles.details}>
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{props.title}</Text>
+                    <TouchableOpacity onPress={()=>{props.navigation.navigate('EventDetail')}}>
+                        <Text style={styles.title}>{props.title}</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity style={{ size:22, alignItems: 'flex-end', marginVertical: 4}}
                                       onPress = {() => { setheartFilled(heartFilled => !heartFilled) }} >
                         {heartFilled? <FilledHeart /> : <EmptyHeart />}

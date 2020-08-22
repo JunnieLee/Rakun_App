@@ -1,28 +1,30 @@
 import React, { useState, Component } from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Animated, Alert} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Animated, Alert, Dimensions} from 'react-native';
+import Filter from "./GenreDetailPage";
 
-// import GenreList from "../../containers/GenreList";
-// import Filter from '../.././assets/icons/drawable/filter.svg';
+import GoBack from '~assets/icons/drawable/goback.svg';
 
-const EventDetailPage = ({scrollY}) =>{
+const BannerWidth = Dimensions.get('window').width;
+
+const EventDetailPage = (props) =>{
 
 
         return (
-                <View style={styles.Container}>
-
+            <View style={{backgroundColor:'white', paddingTop: Platform.OS === 'android' ? 25 : 0 }}>
+                <View style={{ flexDirection:'row', marginLeft: '5%', marginVertical:BannerWidth*(1/40)}}>
+                    <TouchableOpacity onPress={()=> props.navigation.goBack()}>
+                        <GoBack style={styles.Filer}/>
+                    </TouchableOpacity>
+                </View>
+                <ScrollView  contentContainerStyle={styles.Container}>
                     <View style={{ width: '27%', marginLeft:'2%'}}>
-
+                        <Text style={styles.GenreName}> 뮤지컬 </Text>
                     </View>
                     <View style={{ width: '73%'}}>
-                        <View style={{ backgroundColor: (scrollY==0)?'blue':'red', height: 400 }}/>
-                        <Text>Hello There~~~~</Text>
-                        <Text>{scrollY}</Text>
-                        <View style={{ backgroundColor: 'green', height: 400 }}/>
-
+                        <Text>Hi</Text>
                     </View>
-
-                </View>
-
+                </ScrollView>
+            </View>
         );
 
 
@@ -33,10 +35,10 @@ const EventDetailPage = ({scrollY}) =>{
 
 const styles = StyleSheet.create({
     Container : {
-        // marginVertical: 50,
+        marginVertical: 20,
         flexDirection: 'row',
+        backgroundColor:'white'
     },
-
 });
 
 

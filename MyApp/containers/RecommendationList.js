@@ -44,10 +44,11 @@ const RecommendationList = ({props, navigation}) => {
         RecommendationItems.push(
             <View key = {i}>
                 <RecommendationItem
+                    rating = {RecommendationItemRating[i]}
                     image = {RecommendationItemImage[i]}
                     title = {RecommendationItemTitle[i]}
                     date = {RecommendationItemDate[i]}
-                    rating = {RecommendationItemRating[i]}
+                    navigation = {navigation}
                 />
             </View>
         )
@@ -56,9 +57,9 @@ const RecommendationList = ({props, navigation}) => {
         return (
             <View style={styles.container}>
                 <ScrollView>
-
                     { RecommendationItems }
-                    <TouchableOpacity style={{ marginVertical:20}} onPress={()=>{navigation.navigate('Details') }}>
+                    <TouchableOpacity style={{ marginVertical:20}}
+                                      onPress={()=>{navigation.push('GenreDetail', {genreName:MenuItems_name[0] } ) }}>
                         <View style = {styles.separatorRectangle}>
                             <Text style = {styles.separatorNameText}>
                                 {MenuItems_name[0]} 전체보기

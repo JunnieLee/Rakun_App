@@ -1,9 +1,11 @@
+import 'react-native-gesture-handler';
+
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import MainPage from '~screens/Main/MainPage';
+import MainStack from '~screens/Main/MainStack';
 import My_BasicPage from '~screens/MY/My_BasicPage'; // 절대경로 사용
 import My_RecPage from '~screens/My_Rec/MyRecPage';
 import MagazineListUpPage from '~screens/Magazine/MagazineListUpPage';
@@ -19,17 +21,18 @@ import FocusedMyRec from '~assets/icons/drawable/icon_myrec_focused.svg';
 import FocusedRakun from '~assets/icons/drawable/icon_myrakun_focused.svg';
 
 
+
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
     return (
         <Tab.Navigator
-            initialRouteName="Main"
+            initialRouteName="Home"
             tabBarOptions={{
                 activeTintColor: '#a98c66',
             }}>
             <Tab.Screen name="Home"
-                        component={MainPage}
+                        component={MainStack}
                         options={{
                             tabBarLabel: '홈',
                             tabBarIcon: ({ color, size, focused }) => (

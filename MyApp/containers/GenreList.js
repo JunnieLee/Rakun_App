@@ -74,6 +74,7 @@ const GenreList = (props) => {
                     date = {ItemDate[i]}
                     rating = {ItemRating[i]}
                     likes = {ItemLikes[i]}
+                    navigation = {props.navigation}
                 />
                 <GenreItem
                     image = {ItemImage[i+1]}
@@ -81,6 +82,7 @@ const GenreList = (props) => {
                     date = {ItemDate[i+1]}
                     rating = {ItemRating[i+1]}
                     likes = {ItemLikes[i+1]}
+                    navigation = {props.navigation}
                 />
             </View>
         )
