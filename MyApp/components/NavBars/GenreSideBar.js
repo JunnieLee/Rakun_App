@@ -16,6 +16,18 @@ const GenreSideBar =  props => {
     var MenuItems = [];
 
     for(let i = 0; i < MenuItems_name.length; i++){
+
+        let underline_len = '0%';
+        let text_len = MenuItems_name[i].length;
+
+        if (text_len==2){
+            underline_len = '42%';
+        } else if (text_len==3){
+            underline_len = '62%';
+        } else if (text_len==5){
+            underline_len = '98%';
+        }
+
         MenuItems.push(
             <View key = {i}>
                 <TouchableOpacity style={styles.MenuItem}
@@ -25,7 +37,9 @@ const GenreSideBar =  props => {
                     </Text>
                     {/* underline for focused element */}
                     {(i==ActivatedIdx) ?
-                        <View style={styles.underlineRectangle} /> : null }
+                        <View style={{ height: 4, backgroundColor: '#4d5c6f',
+                            width:underline_len }} />
+                            : null }
                 </TouchableOpacity>
 
             </View>
@@ -41,9 +55,10 @@ const GenreSideBar =  props => {
 
 const styles = StyleSheet.create({
     LeftMenu: {
-        width:100,
-        marginLeft:20,
-        alignItems: 'flex-start'
+        width: '27%',
+        marginLeft:'4.5%',
+        alignItems: 'flex-start',
+        marginTop:'2%'
     },
     MenuItem: {
         marginTop:5,

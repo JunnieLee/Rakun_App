@@ -13,12 +13,12 @@ const RecommendationItem = (props) => {
 
     for (var i=0; i < props.rating ; i++){
         ratings.push(
-            <FilledStar style={{ size: 13 }}/>
+            <FilledStar key={i} style={{ size: 13 }}/>
         );
     }
     for (var i=0; i < (5-props.rating) ; i++){
         ratings.push(
-            <EmptyStar style={{ size: 13 }}/>
+            <EmptyStar key={i+5} style={{ size: 13 }}/>
         );
     }
 

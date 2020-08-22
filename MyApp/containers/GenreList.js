@@ -105,7 +105,7 @@ const GenreList = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // paddingVertical: '4%'
+        //paddingVertical: '4%'
     }
 });
 

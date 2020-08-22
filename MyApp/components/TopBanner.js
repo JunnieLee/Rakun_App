@@ -3,6 +3,8 @@ import React from 'react';
 import Carousel from 'react-native-banner-carousel';
 import { StyleSheet, Image, View, Dimensions, Animated } from 'react-native';
 
+import { LogBox } from 'react-native';
+
 const BannerWidth = Dimensions.get('window').width;
 const BannerHeight = 200;
 
@@ -12,6 +14,8 @@ const images = [
     'https://user-images.githubusercontent.com/33515577/89800140-5148dc80-db69-11ea-93c0-137b729c2b89.png'
 ];
 // 내가 임의로 올려놓은 이미지들
+
+LogBox.ignoreAllLogs();
 
 export default class TopBanner extends React.Component {
     renderPage(image, index) {
@@ -34,6 +38,8 @@ export default class TopBanner extends React.Component {
                     loop
                     index={0}
                     pageSize= {BannerWidth}
+                    itemHeight={BannerHeight}
+                    itemWidth={BannerWidth}
                     useNativeDriver={true}
                 >
                     {images.map((image, index) => this.renderPage(image, index))}

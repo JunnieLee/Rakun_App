@@ -9,7 +9,7 @@ import {
     TouchableOpacity,
     SafeAreaView,
     ScrollView,
-    Dimensions
+    Dimensions, StatusBar
 } from 'react-native';
 
 
@@ -47,7 +47,7 @@ const MyRecPage =  props =>  {
                     <Text style={styles.titleUnFocused}> 내리뷰 ({MyReviewNum}) </Text>
                 </TouchableOpacity>
             </View>
-            <View style={{ marginLeft: 0,width: '20%', height: 4, backgroundColor: '#4d5c6f' }}/>
+            <View style={{ marginLeft: 0, width: '17%', height: 4, backgroundColor: '#4d5c6f' }}/>
         </View>
     );
 
@@ -69,13 +69,18 @@ const MyRecPage =  props =>  {
 
 
         return (
-            <SafeAreaView>
+            <View style={{ width:'100%', height:'100%', backgroundColor:'white'}}>
                 <View style={styles.container}>
-                    <Text style = {styles.topHeader}>내 관람</Text>
-                    { (Choice==0)? myMiniHeader_ver1 : myMiniHeader_ver2 }
-                    { (Choice==0)? <JjimList/> : <MyReviewList/> }
+                    <StatusBar barStyle="dark-content" backgroundColor={'white'}/>
+                    <View style={{ width:'100%', backgroundColor:'white'}}>
+                        <Text style = {styles.topHeader}>내 관람</Text>
+                        { (Choice==0)? myMiniHeader_ver1 : myMiniHeader_ver2 }
+                    </View>
+                    <ScrollView>
+                        { (Choice==0)? <JjimList/> : <MyReviewList/> }
+                    </ScrollView>
                 </View>
-            </SafeAreaView>
+            </View>
         );
 
 }
@@ -86,8 +91,9 @@ const styles = StyleSheet.create({
         // alignItems: 'center',
         // justifyContent: 'center',
         backgroundColor: 'white',
-        marginVertical: '10%',
-        marginHorizontal: '4%'
+        marginTop: '7%',
+        marginHorizontal: '4%',
+        paddingTop: Platform.OS === 'android' ? 25 : 0
         // marginLeft: '5%'
     },
     topHeader: {

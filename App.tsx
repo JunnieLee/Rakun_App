@@ -11,6 +11,8 @@
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 
+
+
 import {ApolloProvider} from '@apollo/react-hooks';
 /*
 import ApolloClient from 'apollo-boost';
@@ -27,15 +29,15 @@ import auth from '@react-native-firebase/auth';
 import { ThemeProvider } from 'styled-components';
 import styled from 'styled-components/native';
 
-import React from 'react';
+import React, {useState} from 'react';
 
 import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
-  Text,
-  StatusBar,
+  Text, Platform,
+  StatusBar, Alert, Dimensions,
 } from 'react-native';
 
 import {
@@ -53,7 +55,7 @@ import MainBottomTab from './MyApp/components/NavBars/MainBottomTab';
 import MyRecPage from "./MyApp/screens/My_Rec/MyRecPage";
 import GenreDetailPage from "./MyApp/screens/Details/GenreDetailPage";
 import My_BasicPage from './MyApp/screens/MY/My_BasicPage';
-
+import EventDetailPage from './MyApp/screens/Details/EventDetailPage';
 
 declare const global: {HermesInternal: null | {}};
 
@@ -79,32 +81,42 @@ const client = new ApolloClient({
 });
 //
 
+const Width = Dimensions.get('window').width;
+const Height = Dimensions.get('window').height;
 
 const App = () => {
+
+  const [scrollY, setY] = useState(0);
+
   return (
       <ApolloProvider client={client}>
         <NavigationContainer>
       <StatusBar barStyle="dark-content" backgroundColor={'transparent'} translucent={true}/>
-      <SafeAreaView style={{ flex: 1 }}>
+
+          <SafeAreaView style={{ flex: 1 }}>
           {/* Page Rendering*/}
 
-         <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}>
+          <View style={{ width:'100%', paddingTop: Platform.OS === 'android' ? 25 : 0}}/>
+         <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.scrollView}
+                     onScroll={(e)=>{ setY(e.nativeEvent.contentOffset.y)}}
+                     scrollEventThrottle={16}
+         >
+
            {/*<MyRecPage/>*/}
            {/*<MainPage/>*/}
-            <My_BasicPage />
+           {/*<My_BasicPage /> */}
            {/* <GenreDetailPage/>*/}
+
+            <EventDetailPage scrollY={scrollY}/>
 
         </ScrollView>
 
           {/* Fixed Footer Rendering*/}
           <View style={{ position: 'absolute', bottom: 0, width:'100%'}}>
               <MainBottomTab/>
-                <View style={{ height : 80, backgroundColor: 'pink'}}>
-                    <Text style={{ marginTop : 50}}> Area saved for checking the bottom tab ! </Text>
-                </View>
           </View>
 
-      </SafeAreaView>
+          </SafeAreaView>
         </NavigationContainer>
       </ApolloProvider>
       );
@@ -113,40 +125,7 @@ const App = () => {
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: 'white'// Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+  }
 });
 
 export default App;

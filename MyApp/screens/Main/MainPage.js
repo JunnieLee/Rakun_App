@@ -1,8 +1,17 @@
 import React, {Component, useState} from 'react';
-import {View, Text, StyleSheet, Modal, Button, Image, TouchableOpacity, SafeAreaView, ScrollView} from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    Modal,
+    Button,
+    Image,
+    TouchableOpacity,
+    SafeAreaView,
+    ScrollView,
+    Platform, StatusBar, Dimensions
+} from 'react-native';
 
-import StickyParallaxHeader from 'react-native-sticky-parallax-header';
-import StickyHeaderFooterScrollView from 'react-native-sticky-header-footer-scroll-view';
 
 import SearchPage from './SearchPage';
 import TopBanner from "../../components/TopBanner";
@@ -13,6 +22,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import GenreDetailPage from '.././Details/GenreDetailPage';
+
+
+const BannerWidth = Dimensions.get('window').width;
 
 function GenreDetailScreen({ navigation }) {
     return (
@@ -29,50 +41,52 @@ const MainPageHelper = ({props, navigation}) => {
 
     const openSearchView = () => setisVisible(isVisible => isVisible = (!isVisible));
 
-    var fixedHeader = (
+    const fixedHeader =(
         <View style ={styles.header}>
-            <Text style ={styles.headerTitle}>당신을 위한</Text>
-            <TouchableOpacity style={styles.Search} onPress = {openSearchView} >
-                <Image
-                    source={require('../.././assets/icons/search.png')}
-                />
-            </TouchableOpacity>
+            <View style={{ flexDirection:'row', alignItems:'center'}}>
+                <Text style ={styles.headerTitle}>당신을 위한</Text>
+                <TouchableOpacity style={styles.Search} onPress = {openSearchView} >
+                    <Image
+                        source={require('../.././assets/icons/search.png')}
+                    />
+                </TouchableOpacity>
+            </View>
         </View>
     );
 
-
         return (
-            <View style = {styles.container}>
-                <TopBanner/>
-                {fixedHeader}
-                <View style={styles.mainContent}>
-                    <GenreSideBar style={{ width: '27%'}}/>
-                    {/* Side Bar - Genre  : width 27% */}
-                    {/* - RecommendationList - Item List Scroll View : width 73 % */}
-                    <RecommendationList style={{ width: '73%'}} navigation={navigation}/>
-                </View>
-                <Modal animationType = {"slide"} transparent = {false} visible = {isVisible} statusBarTranslucent={true}>
-                    {/*All views of Modal*/}
-                    <SafeAreaView style={{ flex: 1 }}>
-                    <View style = {styles.modal}>
-                        <TouchableOpacity onPress={ openSearchView }>
-                            <Image
-                                source={require('../.././assets/icons/close.png')}
-                                style={styles.closeTab}
-                            />
-                        </TouchableOpacity>
-                        {/* Show Search Page */}
-                        <SearchPage />
-                    </View>
-                    </SafeAreaView>
-                </Modal>
-                {/*Button will change state to true and view will re-render*/}
+            <>
+                <ScrollView stickyHeaderIndices={[2]}>
+                    <StatusBar barStyle="dark-content" backgroundColor={'transparent'} translucent={true}/>
+                    <TopBanner/>
+                        {fixedHeader}
+                    <View style={styles.container}>
+                        <View style={styles.mainContent}>
+                            <GenreSideBar style={{ width: '27%'}}/>
+                            {/* Side Bar - Genre  : width 27% */}
+                            {/* - RecommendationList - Item List Scroll View : width 73 % */}
+                            <RecommendationList style={{ width: '73%'}} navigation={navigation}/>
+                        </View>
+                        <Modal animationType = {"slide"} transparent = {false} visible = {isVisible} statusBarTranslucent={true}>
+                            {/*All views of Modal*/}
+                            <SafeAreaView style={{ flex: 1 }}>
+                            <View style = {styles.modal}>
+                                <TouchableOpacity onPress={ openSearchView }>
+                                    <Image
+                                        source={require('../.././assets/icons/close.png')}
+                                        style={styles.closeTab}
+                                    />
+                                </TouchableOpacity>
+                                {/* Show Search Page */}
+                                <SearchPage />
+                            </View>
+                            </SafeAreaView>
+                        </Modal>
+                        {/*Button will change state to true and view will re-render*/}
 
-                <Text style = {styles.bigletter}>This is end of the main page</Text>
-                <View style={{ height:200, backgroundColor:'white' }}>
-                    <Text> Still gotta work on the page ..</Text>
-                </View>
-            </View>
+                    </View>
+                </ScrollView>
+            </>
         );
 }
 
@@ -82,7 +96,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'white',
-        paddingBottom:10
+        paddingBottom:10,
+        // paddingTop: Platform.OS === 'android' ? 25 : 0
     },
     modal: {
         flex: 1,
@@ -109,29 +124,41 @@ const styles = StyleSheet.create({
         paddingLeft:30
     },
     header: {
+        backgroundColor:'white',
         width: '100%',
-        height: 90,
-        paddingTop: 25,
-        backgroundColor: 'white',
-        flexDirection: 'row',
+        height: BannerWidth*(1/6),
+        // paddingTop: 25,
+        // backgroundColor: 'white',
+        // flexDirection: 'row',
+        alignItems: 'center',
+        paddingBottom: BannerWidth*(1/20)
     },
     headerTitle: {
-        width: '90%',
+        width: '80%',
         color: 'black',
         fontSize: 26,
-        height: 36,
+        height: '100%',
         paddingLeft: 15,
         fontFamily: "NotoSansCJKkr",
         fontWeight: "100",
         fontStyle: "normal",
-        lineHeight: 36,
+        // lineHeight: 36,
         letterSpacing: 0,
-        alignItems: 'flex-start'
+        // alignItems: 'flex-start',
+        flexDirection: 'row',
+        // backgroundColor:'red'
+        // alignItems:'center',
+        paddingTop: BannerWidth*(1/20),
+        paddingBottom: BannerWidth*(1/20)
     },
     Search: {
-        width: 22,
-        height: 18,
-        alignItems: 'flex-end'
+        width: '15%',
+        height: '90%',
+        marginTop:'1%',
+        marginRight:'5%',
+        alignItems: 'flex-end',
+        paddingTop: BannerWidth*(1/20)
+        // backgroundColor:'blue'
     },
     mainContent: {
         flexDirection: 'row',

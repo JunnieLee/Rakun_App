@@ -78,12 +78,11 @@ const MY_BasicPage =  props => {
     );
 
     return (
+        <View style={{ width: '100%', height:'100%', backgroundColor: 'white'}}>
         <View style={styles.Container}>
             {top}
             {middle}
             {bottom}
-
-
             <Modal animationType = {"slide"} transparent = {false} visible = {isVisible} statusBarTranslucent={true}>
                 {/*All views of Modal*/}
                 <SafeAreaView style={{ flex: 1 }}>
@@ -96,7 +95,7 @@ const MY_BasicPage =  props => {
                         </TouchableOpacity>
                         {/* Show Edit Page */}
 
-                        
+
                             <My_EditProfilePage
                                 profileImage = {profileImage}
                                 nickname={nickname}
@@ -106,7 +105,7 @@ const MY_BasicPage =  props => {
                     </View>
                 </SafeAreaView>
             </Modal>
-
+        </View>
         </View>
     );
 }
@@ -116,9 +115,11 @@ const MY_BasicPage =  props => {
 
 const styles = StyleSheet.create({
     Container : {
+        backgroundColor:'white',
         marginVertical: BannerWidth*(0.2),//50,
         width: BannerWidth*(0.9),
-        marginHorizontal: BannerWidth*(0.1)*(0.5)
+        marginHorizontal: BannerWidth*(0.1)*(0.5),
+        paddingTop: Platform.OS === 'android' ? 25 : 0
         // alignItems: 'center'
     },
     WelcomeText: {

@@ -8,10 +8,10 @@ const MyReviewItem = (props) => {
 
     var ratings = [ ];
     for (var i=0; i < props.rating ; i++){
-        ratings.push( <FilledStar style={{ size: 13 }}/>);
+        ratings.push( <FilledStar key={i} style={{ size: 13 }}/>);
     }
     for (var i=0; i < (5-props.rating) ; i++){
-        ratings.push( <EmptyStar style={{ size: 13 }}/> );
+        ratings.push( <EmptyStar key={i+5} style={{ size: 13 }}/> );
     }
 
     return (

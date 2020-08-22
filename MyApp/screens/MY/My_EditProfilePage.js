@@ -119,9 +119,7 @@ const My_EditProfilePage =  props => {
                     onPress={()=>{}}>
                     <Text style={styles.saveButtonText}>저장하기</Text>
                 </TouchableOpacity>
-
-                <View style={{height:300}}/>
-
+                <View style={{ width: '100%', height:25, backgroundColor:'white'}}/>
             </View>
         </View>
         </KeyboardAwareScrollView>
