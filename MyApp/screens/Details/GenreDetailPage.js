@@ -5,6 +5,7 @@ import GenreList from "../../containers/GenreList";
 
 import Filter from '../.././assets/icons/drawable/filter.svg';
 import GoBack from '~assets/icons/drawable/goback.svg';
+import Share from '~assets/icons/drawable/share.svg';
 
 const BannerWidth = Dimensions.get('window').width;
 
@@ -19,6 +20,7 @@ const GenreDetailPage =  ({props, navigation, genreName}) => {
         <ScrollView  stickyHeaderIndices={[0]} contentContainerStyle={styles.Container}>
             <View style={{ width: '27%', marginLeft:'2%'}}>
                 <Text style={styles.GenreName}>{JSON.stringify(genreName)} 뮤지컬</Text>
+                <Share/>
                 <TouchableOpacity style={{flexDirection:'row', marginHorizontal: '8%'}} onPress={()=>{}}>
                     <Text style={styles.Filer}> 필터 </Text>
                     <Filter style={styles.Filer}/>

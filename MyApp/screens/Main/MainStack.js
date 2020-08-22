@@ -5,8 +5,8 @@ import { View, Text } from 'react-native';
 
 import MainPage from '~screens/Main/MainPage';
 import GenreDetailPage from '~screens/Details/GenreDetailPage';
-import EventDetailPage from '~screens/Details/EventDetailPage';
-
+// import EventDetailPage from '~screens/Details/EventDetailPage';
+import EventDetailStack from '~screens/Details/EventDetailStack';
 
 const Stack = createStackNavigator();
 
@@ -15,7 +15,7 @@ function MainStack() {
             <Stack.Navigator initialRouteName="Main" headerMode='none'>
                 <Stack.Screen name="Main" component={MainPage} />
                 <Stack.Screen name="GenreDetail" component={GenreDetailPage} />
-                <Stack.Screen name="EventDetail" component={EventDetailPage} />
+                <Stack.Screen name="EventDetail" component={EventDetailStack} />
             </Stack.Navigator>
     );
 }
