@@ -31,8 +31,9 @@ const RecommendationItem = (props) => {
                 <View style={styles.imageContainer}>
                     <TouchableOpacity onPress={()=>{
 
-                        props.navigation.navigate('EventDetail', {
+                        props.navigation.push('EventDetail', {
                             screen: 'EventDetailPage',
+                            tabBarVisible: false,
                             params: {
                                 image: props.image,
                                 rating:props.rating,

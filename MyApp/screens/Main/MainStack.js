@@ -8,6 +8,7 @@ import GenreDetailPage from '~screens/Details/GenreDetailPage';
 // import EventDetailPage from '~screens/Details/EventDetailPage';
 import EventDetailStack from '~screens/Details/EventDetailStack';
 
+
 const Stack = createStackNavigator();
 
 function MainStack() {
@@ -15,7 +16,8 @@ function MainStack() {
             <Stack.Navigator initialRouteName="Main" headerMode='none'>
                 <Stack.Screen name="Main" component={MainPage} />
                 <Stack.Screen name="GenreDetail" component={GenreDetailPage} />
-                <Stack.Screen name="EventDetail" component={EventDetailStack} tabBarVisible={false}/>
+                <Stack.Screen name="EventDetail" component={EventDetailStack}
+                              options={{tabBarVisible:false}}/>
             </Stack.Navigator>
     );
 }

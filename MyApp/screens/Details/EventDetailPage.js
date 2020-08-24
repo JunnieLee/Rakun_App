@@ -4,10 +4,12 @@ import { useNavigation } from '@react-navigation/native';
 
 import GoBack from '~assets/icons/drawable/goback.svg';
 import Share from '~assets/icons/drawable/share.svg';
+
 import BlackStarFilled from '~assets/icons/drawable/blackstarfilled.svg';
 
 
 import ReviewShortenedView from '~screens/Review/ReviewShortenedView';
+import SubBottomTab from "~components/SubBottomTab";
 
 const BannerWidth = Dimensions.get('window').width;
 const ItemWidth = BannerWidth*(0.73);
@@ -86,7 +88,7 @@ const EventDetailPage = ({props, route}) =>{
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={styles.MoreButton}
-                                    onPress={()=>{}}
+                                    onPress={()=>{navigation.push( 'EventDetailSeeMore', {eventKey: 989898} )}}
                                 >
                                     <Text style={styles.MoreButtonText}>작품 정보 더보기</Text>
                                 </TouchableOpacity>
@@ -118,11 +120,18 @@ const EventDetailPage = ({props, route}) =>{
                             --> 요 두부분 navigation 어떻게 할지 한번 생각해보기
                          */}
                     </View>
-                        <ReviewShortenedView navigation={navigation} eventKey={989898}/>
+                        <ReviewShortenedView navigation={navigation} eventKey={989898} title={title}/>
                         {/* 추후엔 해당 작품의 key도 props로 함께 넘겨줘야겠지*/}
+
+
                     <View style={{ width:'100%', height:BannerWidth*(1/6)}}/>
+                    <SubBottomTab navigation={navigation} eventKey={989898}/>
+                    <View style={{ width:'100%', height:BannerWidth*(1/8)}}/>
 
                 </ScrollView>
+                <SubBottomTab navigation={navigation} eventKey={989898} viewForReviewList={false} title={title}/>
+
+
             </View>
         );
 

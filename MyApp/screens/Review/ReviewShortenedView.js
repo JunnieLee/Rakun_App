@@ -1,9 +1,11 @@
 import React, { useState, Component } from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity,Dimensions} from 'react-native';
-import FilledStar from "../../components/Items/RecommendationItem";
 
-import BlackStarFilled from '~assets/icons/drawable/blackstarfilled.svg';
+// import BlackStarFilled from '~assets/icons/drawable/blackstarfilled.svg';
 import BlackStarEmpty from '~assets/icons/drawable/blackstarempty.svg';
+
+
+import BlackStarFilled from '~assets/icons/drawable/mystar.svg';
 
 const BannerWidth = Dimensions.get('window').width;
 
@@ -48,7 +50,7 @@ const ReviewShortenedView = props => {
 
     // 2. 3줄을 넘어가면 <더보기> 란 만들어주기!
     var str_long = [];
-    for (var i=0; i< review_samples.length;i++){ (review_samples[i].textContents.length > 79)? str_long.push(true): str_long.push(false) ;}
+    for (var i=0; i< review_samples.length;i++){ (review_samples[i].textContents.length > 74)? str_long.push(true): str_long.push(false) ;}
 
     // 나중에 리뷰들 쭉 있는 리스트 만들때, 이런식으로 현재꺼가 길어서 접혀 있는 상태인지 아닌지 직접 하나의 item 내 state로 만들어주기!
     // (cf. 짧아서 접고 펴고 할 필요가 없는 애들은 계속해서 shortened가 false인 상태이겠지.
@@ -69,7 +71,9 @@ const ReviewShortenedView = props => {
                 <View style={{ marginRight: BannerWidth*(0.05)}} >
                     <View style={{ flexDirection:'row', justifyContent:'space-between', marginTop:BannerWidth*(1/50)}}>
                         <Text style={styles.idText}> {review_samples[0].id} </Text>
+                        <View style={{ flexDirection:'row' }}>
                         {ratings1}
+                        </View>
                     </View>
                     <Text style={styles.dateText}>{review_samples[0].date}</Text>
 
@@ -104,7 +108,9 @@ const ReviewShortenedView = props => {
                 <View style={{ marginRight: BannerWidth*(0.05)}} >
                     <View style={{ flexDirection:'row', justifyContent:'space-between', marginTop:BannerWidth*(1/50)}}>
                         <Text style={styles.idText}> {review_samples[1].id} </Text>
+                        <View style={{ flexDirection:'row' }}>
                         {ratings2}
+                        </View>
                     </View>
                     <Text style={styles.dateText}>{review_samples[1].date}</Text>
 
@@ -135,7 +141,7 @@ const ReviewShortenedView = props => {
                 {/* Button */}
 
                 {/* 나중엔 저 event_key값을 DB에 맞게 바꿔줘야겠지!*/}
-                <TouchableOpacity onPress={()=>{props.navigation.push('ReviewList', {event_key:222})}}
+                <TouchableOpacity onPress={()=>{props.navigation.push('ReviewList', {event_key:222, subNav: props.navigation, title:props.title})}}
                                   style={styles.seeAllButton}>
                     <Text style={styles.seeAllButtonText}>관람후기 전체보기 ({review_num})</Text>
                 </TouchableOpacity>

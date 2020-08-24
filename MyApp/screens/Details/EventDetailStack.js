@@ -8,6 +8,8 @@ import { useNavigation } from '@react-navigation/native';
 import EventDetailPage from '~screens/Details/EventDetailPage';
 import ReviewList from '~screens/Review/ReviewList';
 import WriteReviewPage from '~screens/Review/WriteReviewPage';
+import EventDetailSeeMore from '~screens/Details/EventDetailSeeMore';
+import SubBottomTab from "~components/SubBottomTab";
 
 let nav = null;
 
@@ -30,11 +32,13 @@ const EventDetailStack =({props, navigation, route})=> {
     const navi = useNavigation();
     InsertOtherNav(navi);
 
+
     return (
         <Stack.Navigator initialRouteName="EventDetailPage" headerMode='none'>
-            <Stack.Screen name="EventDetailPage" component={EventDetailPage}/>
-            <Stack.Screen name="WriteReview" component={WriteReviewPage} />
-            <Stack.Screen name="ReviewList" component={ReviewList} />
+            <Stack.Screen name="EventDetailPage" component={EventDetailPage} headerMode='none' tabBarVisible={false}/>
+            <Stack.Screen name="EventDetailSeeMore" component={EventDetailSeeMore} headerMode='none' />
+            <Stack.Screen name="WriteReview" component={WriteReviewPage} headerMode='none'/>
+            <Stack.Screen name="ReviewList" component={ReviewList} headerMode='none'/>
         </Stack.Navigator>
     );
 }
