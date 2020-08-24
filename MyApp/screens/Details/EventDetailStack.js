@@ -9,27 +9,30 @@ import EventDetailPage from '~screens/Details/EventDetailPage';
 import ReviewList from '~screens/Review/ReviewList';
 import WriteReviewPage from '~screens/Review/WriteReviewPage';
 
-
 let nav = null;
 
-const InsertOtherNav =(otherNav)=> {
+
+const InsertOtherNav =({otherNav})=> {
     nav = otherNav;
 }
 
-const fooEventDetail =()=> {
+const fooEventDetail =({props})=> {
     const navigation = useNavigation();
-    return <EventDetailPage MainNav={nav} ReviewNav={navigation}/>
+    return <EventDetailPage MainNav={nav} ReviewNav={navigation}
+                            image = {IMG} rating = {RT}
+                            title = {TTL} date = {DT}/>
 }
 
 const Stack = createStackNavigator();
 
-const EventDetailStack =(props)=> {
+const EventDetailStack =({props, navigation, route})=> {
 
     const navi = useNavigation();
     InsertOtherNav(navi);
+
     return (
-        <Stack.Navigator initialRouteName="EventDetail" headerMode='none'>
-            <Stack.Screen name="EventDetail" component={fooEventDetail} />
+        <Stack.Navigator initialRouteName="EventDetailPage" headerMode='none'>
+            <Stack.Screen name="EventDetailPage" component={EventDetailPage}/>
             <Stack.Screen name="WriteReview" component={WriteReviewPage} />
             <Stack.Screen name="ReviewList" component={ReviewList} />
         </Stack.Navigator>

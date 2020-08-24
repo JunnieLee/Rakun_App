@@ -15,7 +15,7 @@ function MainStack() {
             <Stack.Navigator initialRouteName="Main" headerMode='none'>
                 <Stack.Screen name="Main" component={MainPage} />
                 <Stack.Screen name="GenreDetail" component={GenreDetailPage} />
-                <Stack.Screen name="EventDetail" component={EventDetailStack} />
+                <Stack.Screen name="EventDetail" component={EventDetailStack} tabBarVisible={false}/>
             </Stack.Navigator>
     );
 }

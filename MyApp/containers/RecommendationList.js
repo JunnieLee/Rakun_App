@@ -59,7 +59,7 @@ const RecommendationList = ({props, navigation}) => {
                 <ScrollView>
                     { RecommendationItems }
                     <TouchableOpacity style={{ marginVertical:20}}
-                                      onPress={()=>{navigation.push('GenreDetail', {genreName:MenuItems_name[0] } ) }}>
+                                      onPress={()=>{navigation.push('GenreDetail', {genreName:MenuItems_name[0]}); }}>
                         <View style = {styles.separatorRectangle}>
                             <Text style = {styles.separatorNameText}>
                                 {MenuItems_name[0]} 전체보기

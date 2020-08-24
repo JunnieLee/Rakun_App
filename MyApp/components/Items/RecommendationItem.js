@@ -30,13 +30,16 @@ const RecommendationItem = (props) => {
         <View style={styles.product}>
                 <View style={styles.imageContainer}>
                     <TouchableOpacity onPress={()=>{
+
                         props.navigation.navigate('EventDetail', {
-                            image: props.image,
-                            rating:props.rating,
-                            title: props.title,
-                            date: props.date // 나중엔 해당 item의 key값만 받아오면 되겠지!
-                        }
-                            )
+                            screen: 'EventDetailPage',
+                            params: {
+                                image: props.image,
+                                rating:props.rating,
+                                title: props.title,
+                                date: props.date // 나중엔 해당 item의 key값만 받아오면 되겠지!
+                            }
+                        });
                     }}>
                     <Image style={styles.image}
                            source={{ uri: props.image }}

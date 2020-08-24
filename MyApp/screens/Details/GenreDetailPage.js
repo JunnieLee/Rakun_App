@@ -9,7 +9,10 @@ import Share from '~assets/icons/drawable/share.svg';
 
 const BannerWidth = Dimensions.get('window').width;
 
-const GenreDetailPage =  ({props, navigation, genreName}) => {
+const GenreDetailPage =  ({route, navigation}) => {
+
+    const { genreName } = route.params; /* 2. Get the param */
+
     return (
         <View style={{backgroundColor:'white', paddingTop: Platform.OS === 'android' ? 25 : 0 }}>
             <View style={{ flexDirection:'row', marginLeft: '5%', marginVertical:BannerWidth*(1/40)}}>
@@ -19,8 +22,7 @@ const GenreDetailPage =  ({props, navigation, genreName}) => {
             </View>
         <ScrollView  stickyHeaderIndices={[0]} contentContainerStyle={styles.Container}>
             <View style={{ width: '27%', marginLeft:'2%'}}>
-                <Text style={styles.GenreName}>{JSON.stringify(genreName)} 뮤지컬</Text>
-                <Share/>
+                <Text style={styles.GenreName}>{genreName}</Text>
                 <TouchableOpacity style={{flexDirection:'row', marginHorizontal: '8%'}} onPress={()=>{}}>
                     <Text style={styles.Filer}> 필터 </Text>
                     <Filter style={styles.Filer}/>
