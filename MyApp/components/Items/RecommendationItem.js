@@ -49,7 +49,18 @@ const RecommendationItem = (props) => {
                 </View>
             <View style={styles.details}>
                 <View style={styles.titleContainer}>
-                    <TouchableOpacity onPress={()=>{props.navigation.navigate('EventDetail')}}>
+                    <TouchableOpacity onPress={()=>{
+                        props.navigation.push('EventDetail', {
+                            screen: 'EventDetailPage',
+                            tabBarVisible: false,
+                            params: {
+                                image: props.image,
+                                rating:props.rating,
+                                title: props.title,
+                                date: props.date // 나중엔 해당 item의 key값만 받아오면 되겠지!
+                            }
+                        });
+                    }}>
                         <Text style={styles.title}>{props.title}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{ size:22, alignItems: 'flex-end', marginVertical: 4}}

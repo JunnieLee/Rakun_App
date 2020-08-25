@@ -8,7 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MainStack from '~screens/Main/MainStack';
 import My_BasicPage from '~screens/MY/My_BasicPage'; // 절대경로 사용
 import My_RecPage from '~screens/My_Rec/MyRecPage';
-import MagazineListUpPage from '~screens/Magazine/MagazineListUpPage';
+import MagazineStack from '~screens/Magazine/MagazineStack';
 
 import UnFocusedHome from '~assets/icons/drawable/icon_home.svg';
 import UnFocusedMagazine from '~assets/icons/drawable/icon_magazine.svg';
@@ -41,7 +41,7 @@ function MyTabs() {
                         }}
             />
             <Tab.Screen name="Magazine"
-                        component={MagazineListUpPage}
+                        component={MagazineStack}
                         options={{
                             tabBarLabel: '매거진',
                             tabBarIcon: ({ color, size, focused }) => (

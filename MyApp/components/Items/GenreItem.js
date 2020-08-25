@@ -18,20 +18,38 @@ const GenreItem = (props) => {
     return (
         <View style={styles.product}>
             <View style={styles.imageContainer}>
-                <TouchableOpacity onPress={()=>{props.navigation.push('EventDetail', {
-                        image: props.image,
-                        rating:props.rating,
-                        title: props.title,
-                        date: props.date // 나중엔 해당 item의 key값만 받아오면 되겠지!
-                    }
-                    )}}>
+                <TouchableOpacity onPress={()=>{
+                    props.navigation.push('EventDetail', {
+                        screen: 'EventDetailPage',
+                        tabBarVisible: false,
+                        params: {
+                            image: props.image,
+                            rating:props.rating,
+                            title: props.title,
+                            date: props.date // 나중엔 해당 item의 key값만 받아오면 되겠지!
+                        }
+                    });
+                }}>
                 <Image style={styles.image} source={{ uri: props.image }}/>
                 </TouchableOpacity>
             </View>
 
             <View style={{ marginHorizontal: 3 }}>
 
-                <Text style={styles.title}>{props.title}</Text>
+                <TouchableOpacity onPress={()=>{
+                    props.navigation.push('EventDetail', {
+                        screen: 'EventDetailPage',
+                        tabBarVisible: false,
+                        params: {
+                            image: props.image,
+                            rating:props.rating,
+                            title: props.title,
+                            date: props.date // 나중엔 해당 item의 key값만 받아오면 되겠지!
+                        }
+                    });
+                }}>
+                    <Text style={styles.title}>{props.title}</Text>
+                </TouchableOpacity>
                 <Text style={styles.date}>{props.date}</Text>
 
                 <View style={{ flexDirection:'row', paddingVertical: 10, alignItems: 'flex-start' }}>
