@@ -48,7 +48,9 @@ const SubBottomTab = props => {
                 <View style={{width: '30%', justifyContent:'flex-end', flexDirection:'row'}}>
                 <TouchableOpacity
                     onPress={()=>{props.navigation.push("WriteReview", {eventKey:props.eventKey,
-                                                                        subNav: props.navigation})}}>
+                                                                        subNav: props.navigation,
+                                                                        image: props.image,
+                                                                        title: props.title })}}>
                     <Text style={styles.ButtonText}>관람후기 쓰기</Text>
                 </TouchableOpacity>
                 </View>

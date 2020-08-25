@@ -129,7 +129,9 @@ const EventDetailPage = ({props, route}) =>{
                     <View style={{ width:'100%', height:BannerWidth*(1/8)}}/>
 
                 </ScrollView>
-                <SubBottomTab navigation={navigation} eventKey={989898} viewForReviewList={false} title={title}/>
+                <SubBottomTab navigation={navigation}
+                              eventKey={989898} viewForReviewList={false}
+                              title={title} image={image}/>
 
 
             </View>

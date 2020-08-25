@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         paddingTop: Platform.OS === 'android' ? 25 : 0
     },
     RakunMagazineText: {
-        fontFamily: "AppleSDGothicNeo",
+        fontFamily:  Platform.OS === 'android' ?'NotoSansCJKkr-Thin':"AppleSDGothicNeo",
         fontSize: BannerWidth*(1/15), //26,
         fontWeight: "100",
         fontStyle: "normal",

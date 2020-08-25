@@ -1,11 +1,10 @@
 import React, { useState, Component } from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity,Dimensions} from 'react-native';
 
-// import BlackStarFilled from '~assets/icons/drawable/blackstarfilled.svg';
+import BlackStarFilled from '~assets/icons/drawable/blackstarfilled.svg';
 import BlackStarEmpty from '~assets/icons/drawable/blackstarempty.svg';
 
 
-import BlackStarFilled from '~assets/icons/drawable/mystar.svg';
 
 const BannerWidth = Dimensions.get('window').width;
 
@@ -141,7 +140,8 @@ const ReviewShortenedView = props => {
                 {/* Button */}
 
                 {/* 나중엔 저 event_key값을 DB에 맞게 바꿔줘야겠지!*/}
-                <TouchableOpacity onPress={()=>{props.navigation.push('ReviewList', {event_key:222, subNav: props.navigation, title:props.title})}}
+                <TouchableOpacity onPress={()=>{props.navigation.push('ReviewList',
+                                                    {event_key:222, subNav: props.navigation, title:props.title})}}
                                   style={styles.seeAllButton}>
                     <Text style={styles.seeAllButtonText}>관람후기 전체보기 ({review_num})</Text>
                 </TouchableOpacity>
