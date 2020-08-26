@@ -11,8 +11,9 @@ import WriteReviewPage from '~screens/Review/WriteReviewPage';
 import EventDetailSeeMore from '~screens/Details/EventDetailSeeMore';
 import SubBottomTab from "~components/SubBottomTab";
 
-let nav = null;
 
+/*
+let nav = null;
 
 const InsertOtherNav =({otherNav})=> {
     nav = otherNav;
@@ -24,14 +25,12 @@ const fooEventDetail =({props})=> {
                             image = {IMG} rating = {RT}
                             title = {TTL} date = {DT}/>
 }
+*/
+
 
 const Stack = createStackNavigator();
 
 const EventDetailStack =({props, navigation, route})=> {
-
-    const navi = useNavigation();
-    InsertOtherNav(navi);
-
 
     return (
         <Stack.Navigator initialRouteName="EventDetailPage" headerMode='none'>

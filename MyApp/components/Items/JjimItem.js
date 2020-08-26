@@ -7,23 +7,43 @@ import EmptyHeart from '../.././assets/icons/drawable/btn_like.svg';
 import FilledStar from '../.././assets/icons/drawable/icon_full_star.svg';
 import EmptyStar from '../.././assets/icons/drawable/icon_empty_star.svg';
 
+import { useNavigation } from '@react-navigation/native';
+
 const BannerWidth = Dimensions.get('window').width;
 const iconSize = BannerWidth*(1/3)*(1/8);
 
 const JjimItem = (props) => {
 
+    const navigation = props.navigation;
+
     const [heartFilled, setheartFilled] = useState(true); // for heart
 
     return (
         <View style={styles.product}>
-            <View style={styles.imageContainer}>
-                <Image style={styles.image} source={{ uri: props.image }}/>
-            </View>
+            <TouchableOpacity onPress={()=>{props.navigation.push('EventDetail',
+                {
+                    screen: 'EventDetailPage',
+                    params: {
+                        MyRecNav: navigation, title:props.title, image: props.image, rating: props.rating, date:props.date
+                    },
+                });} }>
+                <View style={styles.imageContainer}>
+                    <Image style={styles.image} source={{ uri: props.image }}/>
+                </View>
+            </TouchableOpacity>
 
             <View style={{ marginHorizontal: 3 }}>
 
-                <Text style={styles.title}>{props.title}</Text>
-                <Text style={styles.date}>{props.date}</Text>
+                <TouchableOpacity onPress={()=>{props.navigation.push('EventDetail',
+                    {
+                        screen: 'EventDetailPage',
+                        params: {
+                            MyRecNav: navigation, title:props.title, image: props.image, rating: props.rating, date:props.date
+                        },
+                    });} }>
+                        <Text style={styles.title}>{props.title}</Text>
+                        <Text style={styles.date}>{props.date}</Text>
+                </TouchableOpacity>
 
                 <View style={{ flexDirection:'row', paddingVertical: 10, alignItems: 'flex-start' }}>
                     <TouchableOpacity onPress = {() => { setheartFilled(heartFilled => !heartFilled) }} >

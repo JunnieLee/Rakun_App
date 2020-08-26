@@ -89,6 +89,8 @@ const WriteReviewPage = ({props,route}) => {
                             {Open? Opened: Closed}
                         </View>
 
+                        <Text>Hello..?</Text>
+
                         {/* 제목과 내용 넣는 text input 부분 ------------------------------------ */}
                         <TextInput
                             style={{width:'100%', height:BannerWidth*(1/10),

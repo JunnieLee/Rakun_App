@@ -12,6 +12,7 @@ import {
     Dimensions, StatusBar
 } from 'react-native';
 
+import { useNavigation } from '@react-navigation/native';
 
 import StickyHeaderFooterScrollView from 'react-native-sticky-header-footer-scroll-view';
 
@@ -22,7 +23,7 @@ import JjimList from "../../containers/JjimList";
 const BannerWidth = Dimensions.get('window').width;
 
 
-const MyRecPage =  props =>  {
+const MyRecPage =  ({props, navigation}) =>  {
 
     // 찜을 보여줄껀지, 내리뷰를 보여줄껀지.
     // 디폴트는 찜먼저 보여주는걸로.
@@ -77,7 +78,7 @@ const MyRecPage =  props =>  {
                         { (Choice==0)? myMiniHeader_ver1 : myMiniHeader_ver2 }
                     </View>
                     <ScrollView>
-                        { (Choice==0)? <JjimList/> : <MyReviewList/> }
+                        { (Choice==0)? <JjimList navigation={navigation}/> : <MyReviewList navigation={navigation}/> }
                     </ScrollView>
                 </View>
             </View>

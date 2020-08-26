@@ -7,6 +7,13 @@ import Share from '~assets/icons/drawable/share.svg';
 
 import BlackStarFilled from '~assets/icons/drawable/blackstarfilled.svg';
 
+//import BlackStarFilled from '~assets/icons/drawable/hellostar.svg';
+
+
+/*
+<Image source={require('~assets/icons/finalBlackStar.png')} style={{ width: }}/>
+ */
+
 
 import ReviewShortenedView from '~screens/Review/ReviewShortenedView';
 import SubBottomTab from "~components/SubBottomTab";
@@ -35,6 +42,9 @@ const EventDetailPage = ({props, route}) =>{
     const { image } = route.params;
     const { rating } = route.params;
     const { date } = route.params;
+
+    const {MyRecNav} = route.params; // 어떻게 사용할 것인가????????
+
 
     const [heartFilled, setheartFilled] = useState(false); // for heart
     const[headerText, setheaderText] = useState(''); // 상단 제목 넣어야할때 사용
@@ -71,10 +81,12 @@ const EventDetailPage = ({props, route}) =>{
                                 <Text style={styles.detailText}>장소 | {place}</Text>
                                 <View style={{flexDirection:'row'}}>
                                     <Text style={styles.detailText}>총평점 | </Text>
-                                    <BlackStarFilled width={iconSize} height={iconSize}/>
+                                    <Image source={require('~assets/icons/finalBlackStar.png')}
+                                           style={{ width:iconSize, height:iconSize, marginVertical: iconSize*(1/2)}}/>
                                     <Text style={styles.detailText}> {rating}</Text>
                                     <Text style={styles.detailText}>       예상 평점 | </Text>
-                                    <BlackStarFilled width={iconSize} height={iconSize}/>
+                                    <Image source={require('~assets/icons/finalBlackStar.png')}
+                                           style={{ width:iconSize, height:iconSize, marginVertical: iconSize*(1/2) }}/>
                                     <Text style={styles.detailText}> {expected_rating}</Text>
                                 </View>
                             </View>

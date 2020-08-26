@@ -6,15 +6,23 @@ import BlackStarEmpty from '~assets/icons/drawable/blackstarempty.svg';
 import ShingoIcon from '~assets/icons/drawable/shingo.svg';
 
 const BannerWidth = Dimensions.get('window').width;
-
+const iconSize = BannerWidth*(1/25);
 
 
 const ReviewItem = (props) => {
 
     // 1. ratings 작업 (숫자를 받아와 icon list로 만들기)
     var ratings = [ ];
-    for (var i=0; i < props.rating ; i++){ratings.push(<BlackStarFilled key={i} />);}
-    for (var i=0; i < (5-props.rating) ; i++){ratings.push(<BlackStarEmpty key={i+5}/>);}
+    for (var i=0; i < props.rating ; i++){
+        ratings.push(<Image source={require('~assets/icons/finalBlackStar.png')}
+                            style={{ width:iconSize, height:iconSize, marginVertical: iconSize*(1/2)}}
+                            key={i} />);
+    }
+    for (var i=0; i < (5-props.rating) ; i++){ratings.push(<BlackStarEmpty key={i+5}
+                                                                           style={{marginVertical: iconSize*(1/2)}}
+                                                                           width={iconSize}
+                                                                           height={iconSize}
+                                                            />);}
 
     // 2. 3줄을 넘어가면 <더보기> 란 만들어주기!
     var str_long = (props.text.length > 90);

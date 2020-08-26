@@ -7,6 +7,7 @@ import BlackStarEmpty from '~assets/icons/drawable/blackstarempty.svg';
 
 
 const BannerWidth = Dimensions.get('window').width;
+const iconSize = BannerWidth*(1/25);
 
 // temporary hard-coded data --> gotta work on this one later one!
 const review_num = 10;
@@ -40,12 +41,27 @@ const ReviewShortenedView = props => {
     // 1. ratings 작업 (숫자를 받아와 icon list로 만들기)
 
     var ratings1 = [ ];
-    for (var i=0; i < review_samples[0].rating ; i++){ratings1.push(<BlackStarFilled key={i} />);}
-    for (var i=0; i < (5-review_samples[0].rating) ; i++){ratings1.push(<BlackStarEmpty key={i+5}/>);}
+    for (var i=0; i < review_samples[0].rating ; i++){
+        ratings1.push(<Image source={require('~assets/icons/finalBlackStarGrayBackground.png')}
+                             style={{ width:iconSize, height:iconSize, marginVertical: iconSize*(1/2)}}
+                             key={i} />);
+    }
+    for (var i=0; i < (5-review_samples[0].rating) ; i++){
+        ratings1.push(<Image source={require('~assets/icons/finalBlackStarGrayBackgroundEmpty.png')}
+                             style={{ width:iconSize*(0.95), height:iconSize*(0.95), marginVertical: iconSize*(1/2)}}
+                             key={i+5}/>);}
+
 
     var ratings2 = [ ];
-    for (var i=0; i < review_samples[1].rating ; i++){ratings2.push(<BlackStarFilled key={i+10} />);}
-    for (var i=0; i < (5-review_samples[1].rating) ; i++){ratings2.push(<BlackStarEmpty key={i+15}/>);}
+    for (var i=0; i < review_samples[1].rating ; i++){
+        ratings2.push(<Image source={require('~assets/icons/finalBlackStarGrayBackground.png')}
+                             style={{ width:iconSize, height:iconSize, marginVertical: iconSize*(1/2)}} key={i+10} />);
+    }
+    for (var i=0; i < (5-review_samples[1].rating) ; i++){
+        ratings2.push(<Image source={require('~assets/icons/finalBlackStarGrayBackgroundEmpty.png')}
+                             style={{ width:iconSize*(0.95), height:iconSize*(0.95), marginVertical: iconSize*(1/2)}}
+                             key={i+15}/>);
+    }
 
     // 2. 3줄을 넘어가면 <더보기> 란 만들어주기!
     var str_long = [];

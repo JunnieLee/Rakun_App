@@ -63,18 +63,21 @@ const JjimList = (props) => {
                     title = {ItemTitle[i]}
                     date = {ItemDate[i]}
                     rating = {ItemRating[i]}
+                    navigation = {props.navigation}
                 />
                 <JjimItem
                     image = {ItemImage[i+1]}
                     title = {ItemTitle[i+1]}
                     date = {ItemDate[i+1]}
                     rating = {ItemRating[i+1]}
+                    navigation = {props.navigation}
                 />
                 <JjimItem
                     image = {ItemImage[i+2]}
                     title = {ItemTitle[i+2]}
                     date = {ItemDate[i+2]}
                     rating = {ItemRating[i+2]}
+                    navigation = {props.navigation}
                 />
             </View>
 

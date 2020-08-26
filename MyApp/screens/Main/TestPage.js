@@ -7,7 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import MainStack from '~screens/Main/MainStack';
 import My_BasicPage from '~screens/MY/My_BasicPage'; // 절대경로 사용
-import My_RecPage from '~screens/My_Rec/MyRecPage';
+import MyRecStack from '~screens/My_Rec/MyRecStack';
 import MagazineStack from '~screens/Magazine/MagazineStack';
 
 import UnFocusedHome from '~assets/icons/drawable/icon_home.svg';
@@ -50,7 +50,7 @@ function MyTabs() {
                         }}
             />
             <Tab.Screen name="MyRec"
-                        component={My_RecPage}
+                        component={MyRecStack}
                         options={{
                             tabBarLabel: '내관람',
                             tabBarIcon: ({ color, size, focused, navigation }) => (
