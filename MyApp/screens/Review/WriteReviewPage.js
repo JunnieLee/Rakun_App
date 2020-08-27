@@ -1,27 +1,30 @@
 import React, { useState, Component } from 'react';
 import {View, Text, SafeView, StyleSheet, Image, TouchableOpacity, ScrollView, Dimensions, TextInput} from 'react-native';
 
+import TextInputMask from 'react-native-text-input-mask';
+
 import CheckBox from '@react-native-community/checkbox';
 
-
 import CloseIcon from '~assets/icons/drawable/close.svg';
-
+import BlueStarEmpty from '~assets/icons/drawable/bluestarempty.svg';
+import BlueStarFilled from '~assets/icons/drawable/bluestarfilled.svg';
 
 const BannerWidth = Dimensions.get('window').width;
-
+const iconSize = BannerWidth*(1/10);
 
 // temporary hard-coded data
 const EventInfo = {
     title: '오페라의 유령',
     image: 'https://user-images.githubusercontent.com/33515577/89978689-12ba3b80-dca9-11ea-87f2-d8c919104ff8.png'
-}
+};
 
 
 
 const WriteReviewPage = ({props,route}) => {
 
     // 상세 작성란이 열려있는지 접혀있는지의 정보를 담고 있는 state
-    const [Open, setOpen] = useState(false);
+    const [Open, setOpen] = useState(true);
+
 
     // 작성란과 관련된 state
     const [Rating, setRating] = useState(0);
@@ -34,6 +37,10 @@ const WriteReviewPage = ({props,route}) => {
     const [Secret, setSecret] = useState(false); // true or false가 되어야 함
 
 
+    const [DetailsFilled, setDetailsFilled] = useState(false);
+
+    // setDetailsFilled((Date!=null || Time!=null || Weather!=null));
+
     // route에서 받아온 param값들 (--> eventKey만 받아오면 나머지는 필요없어질 것 같음)
     const {eventKey} = route.params;
     const {subNav} = route.params;
@@ -45,10 +52,48 @@ const WriteReviewPage = ({props,route}) => {
 
     var Closed = (
         <View style={{ margin: BannerWidth*(0.02), flexDirection:'row', justifyContent:'space-between' }}>
-            <View style={{ backgroundColor:'red'}}>
-                {/* RATINGS ICONS --> MAKE IT TOUCHABLE*/}
-                {Rating==0? <Text style={styles.detailsText}> 별점을 달아주세요! </Text>
-                    : <Text style={styles.detailsText}> {Date} {Time}에 관람. 날씨정보</Text>}
+            <View style={{ margin: BannerWidth*(0.02)}}>
+                <View style={{ flexDirection:'row'}}>
+                    <TouchableOpacity onPress={()=>{setRating(1)}} style={{marginLeft:iconSize*(1/10)}}>
+                        { (Rating < 1)?
+                            <BlueStarEmpty height={iconSize} width={iconSize*(5/6)}/> :
+                            <BlueStarFilled height={iconSize} width={iconSize*(5/6)}/>
+                        }
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{setRating(2)}} style={{marginLeft:iconSize*(1/10)}}>
+                        { (Rating < 2)?
+                            <BlueStarEmpty height={iconSize} width={iconSize*(5/6)}/> :
+                            <BlueStarFilled height={iconSize} width={iconSize*(5/6)}/>
+                        }
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{setRating(3)}} style={{marginLeft:iconSize*(1/10)}}>
+                        { (Rating < 3)?
+                            <BlueStarEmpty height={iconSize} width={iconSize*(5/6)}/> :
+                            <BlueStarFilled height={iconSize} width={iconSize*(5/6)}/>
+                        }
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{setRating(4)}} style={{marginLeft:iconSize*(1/10)}}>
+                        { (Rating < 4)?
+                            <BlueStarEmpty height={iconSize} width={iconSize*(5/6)}/> :
+                            <BlueStarFilled height={iconSize} width={iconSize*(5/6)}/>
+                        }
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{setRating(5)}} style={{marginLeft:iconSize*(1/10)}}>
+                        { (Rating < 5)?
+                            <BlueStarEmpty height={iconSize} width={iconSize*(5/6)}/> :
+                            <BlueStarFilled height={iconSize} width={iconSize*(5/6)}/>
+                        }
+                    </TouchableOpacity>
+                </View>
+                {(Rating==0)? <Text style={styles.detailsText}> 별점을 달아주세요! </Text>
+                    :(Open)? null :
+                        <View style={{flexDirection:'row'}}>
+                            {Date!=null? <Text style={styles.detailsText}> {Date} </Text>:null}
+                            {Time!=null? <Text style={styles.detailsText}> {Time} </Text>:null}
+                            {(Date!=null || Time!=null)?  <Text style={styles.detailsText}>에 관람,  </Text> : null}
+                            {Weather!=null? <Text style={styles.detailsText}>{Weather}</Text>:null}
+                        </View>
+                    }
             </View>
             <View style={styles.imageContainer}>
                 <Image style={styles.image} source={{ uri: EventInfo.image }}/>
@@ -56,15 +101,67 @@ const WriteReviewPage = ({props,route}) => {
         </View>
     );
 
-    var Opened = (
-        <View style={{ margin: BannerWidth*(0.02) }}>
+    var PlusViewWhenOpened = (
+        <View style={{ marginHorizontal: BannerWidth*(1/20)}}>
 
+            <View style={{flexDirection:'row', justifyContent:'space-between', alignItems: 'center'}}>
+                <Text style={styles.detailsTitleText}>관람 일자</Text>
+                    <TextInputMask
+                        style={{height:BannerWidth*(1/10), marginRight:'5%'}}
+                        // refInput={ref => { this.input = ref }}
+                        keyboardType={'numeric'}
+                        placeholder={'YYYY   /   MM   /   DD'}
+                        placeholderTextColor={"#9c9c9c"}
+                        onChangeText={(formatted, extracted) => {
+                            // console.log(formatted) // +1 (123) 456-78-90
+                            // console.log(extracted) // 1234567890
+                            setDate(extracted==''? null : extracted.slice(0,4)+'.'+ extracted.slice(4,6)+'.'+extracted.slice(6,8)+'.')
+                        }}
+                        mask={"[0000]   /   [00]   /   [00]"}
+                        textAlignVertical={'top'}
+                        value={Date}
+                    />
+            </View>
+            <View style={{ width:'100%', height:1, backgroundColor:'#979797', marginVertical:4}}/>
+
+            <View style={{flexDirection:'row', justifyContent:'space-between', alignItems: 'center'}}>
+                <Text style={styles.detailsTitleText}>관람 시간</Text>
+                <TextInputMask
+                    style={{height:BannerWidth*(1/10), marginRight:'5%'}}
+                    // refInput={ref => { this.input = ref }}
+                    keyboardType={'numeric'}
+                    placeholder={'HH   /   MM'}
+                    placeholderTextColor={"#9c9c9c"}
+                    onChangeText={(formatted, extracted) => {
+                        // console.log(formatted) // +1 (123) 456-78-90
+                        // console.log(extracted) // 1234567890
+                        setTime(extracted==''? null : extracted.slice(0,2)+':'+ extracted.slice(2,4)) // 09시00분
+                    }}
+                    mask={"[00] 시      [00] 분"}
+                    textAlignVertical={'top'}
+                    value={Time}
+                />
+            </View>
+            <View style={{ width:'100%', height:1, backgroundColor:'#979797', marginVertical:4}}/>
+
+            <View style={{flexDirection:'row', justifyContent:'space-between', alignItems: 'center'}}>
+                <Text style={styles.detailsTitleText}>관람일 날씨</Text>
+                <View style={{flexDirection:'row', alignItems: 'center', justifyContent:'space-between', width:'60%'}}>
+                    <TouchableOpacity onPress={()=>{setWeather('☀')}}><Text>☀</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{setWeather('🌥')}}><Text>🌥</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{setWeather('🌧')}}><Text>🌧</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{setWeather('⛈')}}><Text>⛈</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{setWeather('❄')}}><Text>❄</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{setWeather('💨')}}><Text>💨</Text></TouchableOpacity>
+                </View>
+            </View>
+            <View style={{ width:'100%', height:1, backgroundColor:'white', marginVertical:4}}/>
         </View>
     );
 
     return(
             <View style={{backgroundColor:'#d4d2d2', paddingTop: Platform.OS === 'android' ? 25 : 0}}>
-                <View style={{ marginVertical:BannerWidth*(1/20), backgroundColor:'white',
+                <View style={{ marginVertical:BannerWidth*(1/30), backgroundColor:'white',
                                 borderTopLeftRadius: 15, borderTopRightRadius: 15,}}>
 
                     {/* Top Header Part*/}
@@ -86,10 +183,24 @@ const WriteReviewPage = ({props,route}) => {
                         {/* 접히고 열리는 rating & 상세정보 입력 부분 ------------------------------------ */}
                         <View style={{ width:'100%', borderColor:'#4d5c6f', borderWidth:1,
                             marginVertical:BannerWidth*(1/50)}}>
-                            {Open? Opened: Closed}
+                            {Closed}
+                            {(Rating!=0 && Open)? PlusViewWhenOpened : null}
+                            {/* 이부분 조건문 추후에 잘 정리하기*/}
+                            <View style={{flexDirection:'row', justifyContent:'center', marginBottom: 3}}>
+                                <TouchableOpacity onPress={()=>{setOpen(!Open);
+                                                                setDetailsFilled((Date!=null || Time!=null || Weather!=null));
+                                                            }}
+                                                  style={{justifyContent:'center'}}>
+                                    {
+                                        (Rating==0)? null:
+                                            (Open)?
+                                                <Text style={{fontSize:iconSize*(0.5), color:'#4d5c6f'}}>∧</Text>
+                                                :
+                                                <Text style={{fontSize:iconSize*(0.5), color:'#4d5c6f'}}>∨</Text>
+                                    }
+                                </TouchableOpacity>
+                            </View>
                         </View>
-
-                        <Text>Hello..?</Text>
 
                         {/* 제목과 내용 넣는 text input 부분 ------------------------------------ */}
                         <TextInput
@@ -203,7 +314,17 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         lineHeight: BannerWidth*(1/14),
         letterSpacing: 0,
-        color: "#7f7f7f"
+        color: "#7f7f7f",
+        marginTop: BannerWidth*(0.008),
+    },
+    detailsTitleText:{
+        fontFamily: "AppleSDGothicNeo",
+        fontSize: BannerWidth*(1/28),
+        fontWeight: "normal",
+        fontStyle: "normal",
+        lineHeight:  BannerWidth*(1/14),
+        letterSpacing: 0,
+        color: "#000000"
     },
     imageContainer: {
         width: BannerWidth*(0.15), //'30%', // 그니까 나머지 글 등등은 75%
