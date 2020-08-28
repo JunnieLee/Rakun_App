@@ -119,7 +119,7 @@ const EventDetailPage = ({props, route}) =>{
                         </View>
                         <View style={{ width:'100%', backgroundColor:'black', height: 1, marginTop: BannerWidth*(1/18) }}/>
                         <View style={{ marginRight:BannerWidth*(0.05)}}>
-                            <Text style={styles.miniTitle}>관람 팁</Text>
+                            <Text style={styles.miniTitle}>관람 정보</Text>
                             <Text style={styles.detailText}>
                                 {tips}
                             </Text>

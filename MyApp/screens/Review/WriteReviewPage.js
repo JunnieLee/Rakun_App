@@ -10,6 +10,9 @@ import CloseIcon from '~assets/icons/drawable/close.svg';
 import BlueStarEmpty from '~assets/icons/drawable/bluestarempty.svg';
 import BlueStarFilled from '~assets/icons/drawable/bluestarfilled.svg';
 
+import UpIcon from '~assets/icons/drawable/up.svg';
+import DownIcon from '~assets/icons/drawable/down.svg';
+
 import UnfocusedSunny from '~assets/icons/drawable/unfocusedsunny.svg';
 import UnfocusedCloudy from '~assets/icons/drawable/unfocusedcloudy.svg';
 import UnfocusedRainy from '~assets/icons/drawable/unfocusedrainy.svg';
@@ -20,7 +23,7 @@ import UnfocusedWindy from '~assets/icons/drawable/unfocusedwindy.svg';
 import Sunny from '~assets/icons/drawable/sunny.svg';
 import Cloudy from '~assets/icons/drawable/cloudy.svg';
 import Rainy from '~assets/icons/drawable/rainy.svg';
-import Thunder from '~assets/icons/drawable/thunder.svg';
+import Thunder from '~assets/icons/drawable/invalid_name.svg';
 import Snowy from '~assets/icons/drawable/snowy.svg';
 import Windy from '~assets/icons/drawable/windy.svg';
 
@@ -120,10 +123,9 @@ const WriteReviewPage = ({props,route}) => {
             {/* 요기에 버튼 들어가면 될듯! */}
             <TouchableOpacity onPress={()=>{setOpen(!Open);
                 setDetailsFilled((Date!=null || Time!=null || Weather!=null));}}
-                              style={{justifyContent:'center', margin: BannerWidth*(0.02)}}>
+                              style={{justifyContent:'center', margin: BannerWidth*(0.02), height: iconSize}}>
                 { (Rating==0)? null:
-                    (Open)? <Text style={{fontSize:iconSize*(0.5), color:'#4d5c6f'}}>∧</Text>
-                        : <Text style={{fontSize:iconSize*(0.5), color:'#4d5c6f'}}>∨</Text>
+                                (Open)? <UpIcon/> : <DownIcon/>
                 }
             </TouchableOpacity>
         </View>
