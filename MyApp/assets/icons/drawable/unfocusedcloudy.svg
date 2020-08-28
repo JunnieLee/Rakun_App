@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24">
+    <g fill="none" fill-rule="evenodd">
+        <text fill="#000" font-family="AppleColorEmoji, Apple Color Emoji" font-size="16">
+            <tspan x="0" y="20">🌥</tspan>
+        </text>
+        <path fill="#FFF" fill-opacity=".501" d="M0 2H21V24H0z"/>
+    </g>
+</svg>

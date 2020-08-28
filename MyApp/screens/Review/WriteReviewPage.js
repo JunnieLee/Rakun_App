@@ -5,9 +5,28 @@ import TextInputMask from 'react-native-text-input-mask';
 
 import CheckBox from '@react-native-community/checkbox';
 
+
 import CloseIcon from '~assets/icons/drawable/close.svg';
 import BlueStarEmpty from '~assets/icons/drawable/bluestarempty.svg';
 import BlueStarFilled from '~assets/icons/drawable/bluestarfilled.svg';
+
+import UnfocusedSunny from '~assets/icons/drawable/unfocusedsunny.svg';
+import UnfocusedCloudy from '~assets/icons/drawable/unfocusedcloudy.svg';
+import UnfocusedRainy from '~assets/icons/drawable/unfocusedrainy.svg';
+import UnfocusedThunder from '~assets/icons/drawable/unfocusedthunder.svg';
+import UnfocusedSnowy from '~assets/icons/drawable/unfocusedsnowy.svg';
+import UnfocusedWindy from '~assets/icons/drawable/unfocusedwindy.svg';
+
+import Sunny from '~assets/icons/drawable/sunny.svg';
+import Cloudy from '~assets/icons/drawable/cloudy.svg';
+import Rainy from '~assets/icons/drawable/rainy.svg';
+import Thunder from '~assets/icons/drawable/thunder.svg';
+import Snowy from '~assets/icons/drawable/snowy.svg';
+import Windy from '~assets/icons/drawable/windy.svg';
+
+
+
+
 
 const BannerWidth = Dimensions.get('window').width;
 const iconSize = BannerWidth*(1/10);
@@ -51,7 +70,10 @@ const WriteReviewPage = ({props,route}) => {
     // 열리고 닫히는 view 구현
 
     var Closed = (
-        <View style={{ margin: BannerWidth*(0.02), flexDirection:'row', justifyContent:'space-between' }}>
+        <View style={{ margin: BannerWidth*(0.04), flexDirection:'row', justifyContent:'space-between' }}>
+            <View style={styles.imageContainer}>
+                <Image style={styles.image} source={{ uri: EventInfo.image }}/>
+            </View>
             <View style={{ margin: BannerWidth*(0.02)}}>
                 <View style={{ flexDirection:'row'}}>
                     <TouchableOpacity onPress={()=>{setRating(1)}} style={{marginLeft:iconSize*(1/10)}}>
@@ -90,14 +112,20 @@ const WriteReviewPage = ({props,route}) => {
                         <View style={{flexDirection:'row'}}>
                             {Date!=null? <Text style={styles.detailsText}> {Date} </Text>:null}
                             {Time!=null? <Text style={styles.detailsText}> {Time} </Text>:null}
-                            {(Date!=null || Time!=null)?  <Text style={styles.detailsText}>에 관람,  </Text> : null}
+                            {(Date!=null || Time!=null)?  <Text style={styles.detailsText}>에 관람.  </Text> : null}
                             {Weather!=null? <Text style={styles.detailsText}>{Weather}</Text>:null}
                         </View>
                     }
             </View>
-            <View style={styles.imageContainer}>
-                <Image style={styles.image} source={{ uri: EventInfo.image }}/>
-            </View>
+            {/* 요기에 버튼 들어가면 될듯! */}
+            <TouchableOpacity onPress={()=>{setOpen(!Open);
+                setDetailsFilled((Date!=null || Time!=null || Weather!=null));}}
+                              style={{justifyContent:'center', margin: BannerWidth*(0.02)}}>
+                { (Rating==0)? null:
+                    (Open)? <Text style={{fontSize:iconSize*(0.5), color:'#4d5c6f'}}>∧</Text>
+                        : <Text style={{fontSize:iconSize*(0.5), color:'#4d5c6f'}}>∨</Text>
+                }
+            </TouchableOpacity>
         </View>
     );
 
@@ -147,12 +175,54 @@ const WriteReviewPage = ({props,route}) => {
             <View style={{flexDirection:'row', justifyContent:'space-between', alignItems: 'center'}}>
                 <Text style={styles.detailsTitleText}>관람일 날씨</Text>
                 <View style={{flexDirection:'row', alignItems: 'center', justifyContent:'space-between', width:'60%'}}>
-                    <TouchableOpacity onPress={()=>{setWeather('☀')}}><Text>☀</Text></TouchableOpacity>
-                    <TouchableOpacity onPress={()=>{setWeather('🌥')}}><Text>🌥</Text></TouchableOpacity>
-                    <TouchableOpacity onPress={()=>{setWeather('🌧')}}><Text>🌧</Text></TouchableOpacity>
-                    <TouchableOpacity onPress={()=>{setWeather('⛈')}}><Text>⛈</Text></TouchableOpacity>
-                    <TouchableOpacity onPress={()=>{setWeather('❄')}}><Text>❄</Text></TouchableOpacity>
-                    <TouchableOpacity onPress={()=>{setWeather('💨')}}><Text>💨</Text></TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{setWeather('☀')}} >
+                        {Weather=='☀'?
+                            <>
+                            <Sunny height={BannerWidth*(1/10)}/>
+                            <View style={{ backgroundColor:'#4d5c6f', width: BannerWidth*(1/20), height:3}}/>
+                            </>
+                            :<UnfocusedSunny height={BannerWidth*(1/10)}/>}
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{setWeather('🌥')}}>
+                        {Weather=='🌥'?
+                            <>
+                                <Cloudy height={BannerWidth*(1/10)}/>
+                            <View style={{ backgroundColor:'#4d5c6f', width: BannerWidth*(1/20), height:3}}/>
+                            </>
+                            :<UnfocusedCloudy height={BannerWidth*(1/10)}/>}
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{setWeather('🌧')}}>
+                        {Weather=='🌧'?
+                            <>
+                                <Rainy height={BannerWidth*(1/10)}/>
+                                <View style={{ backgroundColor:'#4d5c6f', width: BannerWidth*(1/20), height:3}}/>
+                            </>
+                            :<UnfocusedRainy height={BannerWidth*(1/10)}/>}
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{setWeather('⛈')}}>
+                        {Weather=='⛈'?
+                            <>
+                                <Thunder height={BannerWidth*(1/10)}/>
+                                <View style={{ backgroundColor:'#4d5c6f', width: BannerWidth*(1/20), height:3}}/>
+                            </>
+                            :<UnfocusedThunder height={BannerWidth*(1/10)}/>}
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{setWeather('❄')}} >
+                        {Weather=='❄'?
+                            <>
+                                <Snowy height={BannerWidth*(1/10)}/>
+                                <View style={{ backgroundColor:'#4d5c6f', width: BannerWidth*(1/20), height:3}}/>
+                            </>
+                            :<UnfocusedSnowy height={BannerWidth*(1/10)}/>}
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>{setWeather('💨')}} >
+                        {Weather=='💨'?
+                            <>
+                                <Windy height={BannerWidth*(1/10)}/>
+                                <View style={{ backgroundColor:'#4d5c6f', width: BannerWidth*(1/20), height:3}}/>
+                            </>
+                            :<UnfocusedWindy height={BannerWidth*(1/10)}/>}
+                    </TouchableOpacity>
                 </View>
             </View>
             <View style={{ width:'100%', height:1, backgroundColor:'white', marginVertical:4}}/>
@@ -187,18 +257,9 @@ const WriteReviewPage = ({props,route}) => {
                             {(Rating!=0 && Open)? PlusViewWhenOpened : null}
                             {/* 이부분 조건문 추후에 잘 정리하기*/}
                             <View style={{flexDirection:'row', justifyContent:'center', marginBottom: 3}}>
-                                <TouchableOpacity onPress={()=>{setOpen(!Open);
-                                                                setDetailsFilled((Date!=null || Time!=null || Weather!=null));
-                                                            }}
-                                                  style={{justifyContent:'center'}}>
-                                    {
-                                        (Rating==0)? null:
-                                            (Open)?
-                                                <Text style={{fontSize:iconSize*(0.5), color:'#4d5c6f'}}>∧</Text>
-                                                :
-                                                <Text style={{fontSize:iconSize*(0.5), color:'#4d5c6f'}}>∨</Text>
-                                    }
-                                </TouchableOpacity>
+
+                                {/* 원래 버튼 있던 자리 */}
+
                             </View>
                         </View>
 
