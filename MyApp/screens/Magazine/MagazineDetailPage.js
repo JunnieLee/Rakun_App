@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import {View, Text, Dimensions, Image, StatusBar, ScrollView, StyleSheet} from 'react-native';
 
+import AutoHeightImage from 'react-native-auto-height-image';
+
+
 import body from '~screens/Magazine/MagazineDetailInfo';
 
 const BannerWidth = Dimensions.get('window').width;
@@ -22,67 +25,37 @@ const caption_full = '올해는 베토벤 탄생 250주년입니다. 전설적�
 // type=="header-two"이면 소제목
 // type=="unstyled"면 일반텍스트
 
-var flexibleHeight=BannerWidth;
-
 const MagazineDetailPage = (props) => {
 
-    // const [changingHeight, setchangingHeight] = useState(BannerWidth);
 
     const content_view = [];
     // 종류 = 이미지, 소제목, 텍스트
     const chunkNum = body.blocks.length;
 
     for (var i=0; i< chunkNum; i++){
-        var chunkView = null;
+
         const content = body.blocks[i];
 
         if (content.type=='header-two'){ // type 1. 소제목
-            chunkView = (
+            content_view.push(
                 <Text style={styles.bodyTitleText} key={i}>{content.text}</Text>
             );
         } else if (content.type=='unstyled'){ // type 2. 텍스트
-            chunkView = (
+            content_view.push(
                 <Text style={styles.bodyPlainText} key={i}>{content.text}</Text>
             );
         } else if (content.type=='atomic'){
             if (content.data.type=='image'){ // type 3. 이미지
-                Image.getSize(content.data.src, (width, height) => {
-                    // flexibleHeight = (height * (BannerWidth*(0.83)/ width));
-                    chunkView = (
-                        <View  key={i} style={{
-                            flexDirection: 'row',
-                            justifyContent: 'flex-end',
-                            marginLeft: BannerWidth*(0.17),
-                            width: BannerWidth*(0.83),
-                            height: (height * (BannerWidth*(0.83)/ width)),// BannerWidth*(0.5), // ....????
-                            marginBottom: BannerWidth*(0.08),
-                            overflow: 'hidden',
-
-                        }}>
-                            <Image style={styles.bodyImage} source={{uri:content.data.src}} resizeMode={'contain'} />
-                        </View>
-                    );
-                });
-                /*
-                chunkView = (
-                    <View  key={i} style={{
-                        flexDirection: 'row',
-                        justifyContent: 'flex-end',
-                        marginLeft: BannerWidth*(0.17),
-                        width: BannerWidth*(0.83),
-                        height: (height * (BannerWidth*(0.83)/ width)),// BannerWidth*(0.5), // ....????
-                        marginBottom: BannerWidth*(0.08),
-                        overflow: 'hidden',
-
-                    }}>
-                        <Image style={styles.bodyImage} source={{uri:content.data.src}} resizeMode={'contain'} />
+                content_view.push(
+                    <View  key={i} style={styles.bodyImageContainer}>
+                        <AutoHeightImage
+                            width={BannerWidth*(0.83)}
+                            source={{uri: content.data.src}}
+                        />
                     </View>
                 );
-                */
             }
         }
-
-        if (chunkView!=null){content_view.push(chunkView)}
     }
 
     return(
@@ -181,17 +154,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         marginLeft: BannerWidth*(0.17),
-        width: BannerWidth*(0.83),
-        height: flexibleHeight,// BannerWidth*(0.5), // ....????
         marginBottom: BannerWidth*(0.08),
-        overflow: 'hidden',
     },
-    bodyImage : {
-        width: '100%',
-        height: '100%',
-        overflow: 'hidden',
-        resizeMode:'contain'
-    }
 });
 
 
