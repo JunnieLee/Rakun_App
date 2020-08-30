@@ -61,7 +61,7 @@ const MyRecPage =  ({props, navigation}) =>  {
                     <Text style={styles.titleUnFocused}> 찜 ({JJimNum}) </Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.miniHeaderHelper} onPress = {() => {}} >
-                    <Text style={styles.titleFocused}> 내리뷰 ({MyReviewNum}) </Text>
+                    <Text style={styles.titleFocused}> 내후기 ({MyReviewNum}) </Text>
                 </TouchableOpacity>
             </View>
             <View style={{ marginLeft: '25%',width: '25%', height: 4, backgroundColor: '#4d5c6f' }}/>

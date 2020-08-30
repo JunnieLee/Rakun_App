@@ -1,12 +1,13 @@
 import React, { useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions, StatusBar} from 'react-native';
 
 
 const BannerWidth = Dimensions.get('window').width;
 
 const LogInPage = (props) => {
     return(
-        <View>
+        <View style={{width:'100%', height:'100%'}}>
+            <StatusBar barStyle="dark-content" backgroundColor={'transparent'} translucent={true}/>
             <Text> Hello </Text>
         </View>
     );

@@ -6,12 +6,12 @@ import { View, Text } from 'react-native';
 // import InitialEntryPage from '~screens/Auth/InitialEntryPage';
 // import LogIn from '~screens/Auth/LogIn/LogInPage';
 
-import New1 from '~screens/Join/Join_1_New1';
-import New2 from '~screens/Join/Join_2_New2';
-import Q1 from '~screens/Join/Join_3_Q1';
-import Q2 from '~screens/Join/Join_4_Q2';
-import Q3 from '~screens/Join/Join_5_Q3';
-import Q4 from '~screens/Join/Join_6_Q4';
+import New1 from '~screens/Auth/Join/Join_1_New1';
+import New2 from '~screens/Auth/Join/Join_2_New2';
+import Q1 from '~screens/Auth/Join/Join_3_Q1';
+import Q2 from '~screens/Auth/Join/Join_4_Q2';
+import Q3 from '~screens/Auth/Join/Join_5_Q3';
+import Q4 from '~screens/Auth/Join/Join_6_Q4';
 
 
 const Stack = createStackNavigator();
