@@ -22,6 +22,8 @@ import FocusedRakun from '~assets/icons/drawable/icon_myrakun_focused.svg';
 
 
 
+// 여기에 loading splash page 만들기!!
+
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
