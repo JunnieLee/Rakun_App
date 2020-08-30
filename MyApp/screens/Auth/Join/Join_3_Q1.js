@@ -36,12 +36,7 @@ const Join_3_Q1 = ({props, navigation}) => {
                 <View>
                     <StatusBar barStyle="dark-content" backgroundColor={'transparent'} translucent={true}/>
                     <View style={{ flexDirection:'row', marginVertical:BannerWidth*(1/30)}}>
-
-                        <TouchableOpacity onPress={()=> navigation.goBack()}
-                                          style={{ flexDirection:'row', marginHorizontal:'5%', alignItems:'center'}}>
-                            <GoBack/>
-                        </TouchableOpacity>
-
+                        <View style={{height: BannerWidth*(1/35)}}/>
                     </View>
 
                     <View style={{height:BannerWidth*(0.05)}}/>
