@@ -125,7 +125,8 @@ const styles = StyleSheet.create({
         fontWeight: "normal",
         fontStyle: "normal",
         letterSpacing: 0,
-        color: "#f77070"
+        color: "#f77070",
+        marginVertical: BannerWidth*(0.02),
     },
     TextInputStyle: {
         height: BannerWidth*(1/9),

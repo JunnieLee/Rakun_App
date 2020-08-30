@@ -13,32 +13,15 @@ const Join_1_New1 = ({props, navigation}) => {
     const [Password, setPassword] = useState('');
     const [ConfirmPassword, setConfirmPassword] = useState('');
 
-    const [Incorrect, setIncorrect] = useState(false); // 오류 시 빨간색 오류 메세지 띄워주기 위함
+    const [PasswordFocused, setPasswordFocused] = useState(false);
+    const [ConfirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
+
+    const [RightPasswordType, setRightPasswordType] = useState(true); // 비밀번호 조건 관련 메세지 띄워주기 위함
 
     const [ConsentFirst, setConsentFirst] = useState(false);
     const [ConsentSecond, setConsentSecond] = useState(false);
     const [ConsentThird, setConsentThird] = useState(false);
 
-    const options = [
-        {
-            key: 1,
-            val: ConsentFirst,
-            func: setConsentFirst,
-            text: '모든 약관에 동의합니다.',
-        },
-        {
-            key: 2,
-            val: ConsentSecond,
-            func: setConsentSecond,
-            text: '개인정보취급 방침 수집에 동의하시나요?',
-        },
-        {
-            key: 3,
-            val: ConsentThird,
-            func: setConsentThird,
-            text: '회원 약관 동의하시나요?',
-        },
-    ];
 
 
     return(
@@ -64,31 +47,61 @@ const Join_1_New1 = ({props, navigation}) => {
 
                         <View style={{marginLeft: '8%'}}>
                             <TextInput style={styles.TextInputStyle}
-                                       onFocus={()=>{setIncorrect(false)}}
                                        onChangeText={text => setEmail(text)}
                                        placeholder='이메일'
                                        placeholderTextColor={'#888888'}
                             />
                             <TextInput style={styles.TextInputStyle}
-                                       onFocus={()=>{setIncorrect(false)}}
-                                       onChangeText={text => setPassword(text)}
+                                       onFocus={()=>{setPasswordFocused(true)}}
+                                       onBlur={()=>{setPasswordFocused(false)}}
+                                       onChangeText={(text) => {
+                                                                    if (
+                                                                        (text.length>=8) && // over 8 words
+                                                                        (text.search(/\d/) !== -1) && // at least one number
+                                                                        (text.search(/[a-zA-Z]/) !== -1) && //  at least one letter
+                                                                        (text.search(/[!@#$%^&*]/) !== -1) &&//  at least one special character
+                                                                        (text.search(/[^a-zA-Z0-9\!\@\#\$\%\^\&\*\(\)\_\+]/) === -1)
+                                                                            // weird char not included
+                                                                    ) { setRightPasswordType(true); setPassword(text);}
+                                                                    else {(text==='')? setRightPasswordType(true): setRightPasswordType(false)}
+                                                                }}
                                        secureTextEntry={true}
                                        placeholder='비밀번호'
                                        placeholderTextColor={'#888888'}
                             />
                             <TextInput style={styles.TextInputStyle}
-                                       onFocus={()=>{setIncorrect(false)}}
-                                       onChangeText={text => setConfirmPassword(text)}
+                                       onFocus={()=>{setConfirmPasswordFocused(true)}}
+                                       onBlur={()=>{setConfirmPasswordFocused(false)}}
+                                       onChangeText={(text) => {setConfirmPassword(text)}}
                                        secureTextEntry={true}
                                        placeholder='비밀번호 확인'
                                        placeholderTextColor={'#888888'}
                             />
-                            {Incorrect?
-                                <Text style={styles.ErrorText}>    이메일 또는 비밀번호를 확인 후 다시 로그인해주세요.</Text>
-                                : null}
-
+                            {
+                                PasswordFocused?
+                                    <Text style={{
+                                        fontFamily: "AppleSDGothicNeo",
+                                        fontSize: BannerWidth*(0.031),
+                                        fontWeight: "normal",
+                                        fontStyle: "normal",
+                                        letterSpacing: 0,
+                                        lineHeight: BannerWidth*(0.05),
+                                        color: (RightPasswordType)?"#4d5c6f":"#f77070",
+                                        marginVertical: BannerWidth*(0.02),
+                                        marginHorizontal: BannerWidth*(0.03),
+                                    }}>
+                                        비밀번호는 문자 숫자 특수문자의 조합으로 8자 이상으로 {"\n"}입력해주세요.
+                                    </Text>
+                                    : null
+                            }
+                            {
+                                ConfirmPasswordFocused?
+                                    !(Password===ConfirmPassword)?
+                                        <Text style={styles.ErrorText}>    비밀번호가 일치하지 않습니다.</Text>
+                                            : null
+                                    : null
+                            }
                         </View>
-
                     </View>
 
 
@@ -141,7 +154,8 @@ const Join_1_New1 = ({props, navigation}) => {
                         </View>
 
 
-                        {Email!=''&&Password!=''&&ConfirmPassword!=''&&ConsentFirst?
+                        {Email!=='' && Password!=='' && ConfirmPassword!=='' && ConsentFirst &&
+                            RightPasswordType && Password===ConfirmPassword ?
                             <TouchableOpacity style={{ width:'100%', height: BannerWidth*(0.13), justifyContent:'center',
                                                         alignItems:'center', backgroundColor:"#4d5c6f"}}
                                               onPress={()=>{navigation.push('New2')}}
@@ -195,7 +209,8 @@ const styles = StyleSheet.create({
         fontWeight: "normal",
         fontStyle: "normal",
         letterSpacing: 0,
-        color: "#f77070"
+        color: "#f77070",
+        marginVertical: BannerWidth*(0.02),
     },
     TextInputStyle: {
         height: BannerWidth*(1/9),
