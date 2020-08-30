@@ -15,7 +15,7 @@ const Join_2_New2 = ({props, navigation}) => {
 
     const [NickName, setNickName] = useState('');
     const [BirthDay, setBirthDay] = useState('');
-
+    const [ConfirmButtonPressed, setConfirmButtonPressed] = useState(false);
 
     const [Incorrect, setIncorrect] = useState(false); // 오류 시 빨간색 오류 메세지 띄워주기 위함
 
@@ -41,23 +41,48 @@ const Join_2_New2 = ({props, navigation}) => {
                         <View style={{height:BannerWidth*(0.1)}}/>
 
                         <View style={{marginLeft: '8%'}}>
-                            <TextInput style={styles.TextInputStyle}
-                                       onFocus={()=>{setIncorrect(false)}}
-                                       onChangeText={text => setNickName(text)}
-                                       placeholder='닉네입'
-                                       placeholderTextColor={'#888888'}
-                            />
-                            <TextInput style={styles.TextInputStyle}
-                                       onFocus={()=>{setIncorrect(false)}}
-                                       onChangeText={text => setBirthDay(text)}
-                                       secureTextEntry={true}
-                                       placeholder='비밀번호'
-                                       placeholderTextColor={'#888888'}
-                            />
 
-                            {Incorrect?
-                                <Text style={styles.ErrorText}>    닉네임 중복확인을 해주세요.</Text>
-                                : null}
+                            <View style={{flexDirection:'row', justifyContent:'space-between', alignItems: 'center', marginRight:'6%'}}>
+                                <TextInput style={styles.TextInputStyle}
+                                           onChangeText={text => setNickName(text)}
+                                           placeholder='닉네임'
+                                           placeholderTextColor={'#888888'}
+                                />
+                                <TouchableOpacity onPress={()=>{
+                                                                    setConfirmButtonPressed(true);
+                                                                    (NickName==='junnie')?
+                                                                    setIncorrect(true) : setIncorrect(false) ;}}
+                                                                    // 나중엔 유저 DB에서 뒤져서(?) 중복 있나없나 확인해야겠지!!
+                                                  style={{ width:'25%', borderWidth:1, borderColor:"#819aa7", borderStyle: "solid",
+                                                            justifyContent:'center', alignItems: 'center'}}
+                                >
+                                    <Text style={styles.ConfirmButtonText}>중복확인</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{backgroundColor: '#888888', width:'100%', height:1}} />
+
+                            <View style={{flexDirection:'row', justifyContent:'space-between', alignItems: 'center', marginVertical: BannerWidth*(0.02)}}>
+                                <Text style={styles.detailsTitleText}> 생년월일</Text>
+                                <TextInputMask
+                                    style={{height:BannerWidth*(1/10), marginRight:'6%'}}
+                                    keyboardType={'numeric'} value={BirthDay}
+                                    placeholder={'YYYY    /    MM    /    DD  '} placeholderTextColor={"#9c9c9c"}
+                                    onChangeText={(formatted, extracted) => {
+                                        // console.log(formatted) // +1 (123) 456-78-90
+                                        // console.log(extracted) // 1234567890
+                                        setBirthDay(extracted)
+                                    }}
+                                    mask={"[0000]    /    [00]    /    [00]  "}
+                                />
+                            </View>
+
+                            <View style={{backgroundColor: '#888888', width:'100%', height:1}} />
+                            { ConfirmButtonPressed ?
+                                Incorrect?
+                                    <Text style={styles.ErrorText}>   닉네임 중복확인을 해주세요.</Text>
+                                    : <Text style={styles.RightText}>   사용하실 수 있는 닉네임입니다.</Text>
+                                : null
+                            }
 
                         </View>
 
@@ -67,10 +92,10 @@ const Join_2_New2 = ({props, navigation}) => {
                     {/* BOTTOM */}
                     <View>
 
-                        {Email!=''&&Password!=''&&ConfirmPassword!=''&&ConsentFirst?
+                        {NickName !== ''&& BirthDay !=='' && ConfirmButtonPressed && !Incorrect ?
                             <TouchableOpacity style={{ width:'100%', height: BannerWidth*(0.13), justifyContent:'center',
                                 alignItems:'center', backgroundColor:"#4d5c6f"}}
-                                              onPress={()=>{(Password===ConfirmPassword)? navigation.push('New2'):setIncorrect(true)}}
+                                              onPress={()=>{navigation.push('Q1')}}
                             >
                                 <Text style={styles.ButtonText}>회원가입</Text>
                             </TouchableOpacity>
@@ -106,6 +131,15 @@ const styles = StyleSheet.create({
         letterSpacing: 0,
         color: "white"
     },
+    ConfirmButtonText:{
+        fontFamily: "AppleSDGothicNeo",
+        fontSize: BannerWidth*(0.033),
+        fontWeight: "normal",
+        fontStyle: "normal",
+        letterSpacing: 0,
+        color: "#819aa7",
+        marginVertical: BannerWidth*(0.01),
+    },
     subText:{
         fontFamily: "AppleSDGothicNeo",
         fontSize: BannerWidth*(0.033),
@@ -121,13 +155,32 @@ const styles = StyleSheet.create({
         fontWeight: "normal",
         fontStyle: "normal",
         letterSpacing: 0,
-        color: "#f77070"
+        color: "#f77070",
+        marginVertical: BannerWidth*(0.02),
+    },
+    RightText : {
+        fontFamily: "AppleSDGothicNeo",
+        fontSize: BannerWidth*(0.031),
+        fontWeight: "normal",
+        fontStyle: "normal",
+        letterSpacing: 0,
+        color: "#4d5c6f",
+        marginVertical: BannerWidth*(0.02),
     },
     TextInputStyle: {
         height: BannerWidth*(1/9),
-        borderBottomColor: "#7f7f7f",
-        borderBottomWidth: 0.7,
+        // borderBottomColor: "#7f7f7f",
+        // borderBottomWidth: 0.7,
         // marginBottom:'5%'
+    },
+    detailsTitleText:{
+        fontFamily: "AppleSDGothicNeo",
+        fontSize: BannerWidth*(1/29),
+        fontWeight: "normal",
+        fontStyle: "normal",
+        lineHeight:  BannerWidth*(1/14),
+        letterSpacing: 0,
+        color: "#000000"
     },
 });
 
