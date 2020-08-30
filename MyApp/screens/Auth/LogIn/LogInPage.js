@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
         fontWeight: "normal",
         fontStyle: "normal",
         letterSpacing: 0,
+        lineHeight: BannerWidth*(0.1),
         color: "black"
     },
     ButtonText:{
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
         height: BannerWidth*(1/9),
         borderBottomColor: "#7f7f7f",
         borderBottomWidth: 0.7,
-        marginBottom:'5%'
+        // marginBottom:'5%'
     },
 });
 
