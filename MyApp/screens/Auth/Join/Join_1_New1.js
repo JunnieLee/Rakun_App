@@ -3,7 +3,6 @@ import {View, Text, StyleSheet, TouchableOpacity, ScrollView,
     TouchableWithoutFeedback, KeyboardAvoidingView, Dimensions, StatusBar,TextInput,Keyboard} from 'react-native';
 
 import GoBack from '~assets/icons/drawable/goback.svg';
-// import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
 const BannerWidth = Dimensions.get('window').width;
 
