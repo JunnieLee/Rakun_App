@@ -12,7 +12,7 @@ import Q1 from '~screens/Auth/Join/Join_3_Q1';
 import Q2 from '~screens/Auth/Join/Join_4_Q2';
 import Q3 from '~screens/Auth/Join/Join_5_Q3';
 import Q4 from '~screens/Auth/Join/Join_6_Q4';
-
+import Main from '~screens/Main/TestPage';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +25,7 @@ function JoinStack() {
             <Stack.Screen name="Q2" component={Q2} />
             <Stack.Screen name="Q3" component={Q3} />
             <Stack.Screen name="Q4" component={Q4} />
+            <Stack.Screen name="Main" component={Main} />
         </Stack.Navigator>
     );
 }

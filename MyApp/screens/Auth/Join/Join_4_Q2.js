@@ -77,7 +77,7 @@ const Join_4_Q2 = ({props, navigation}) => {
 
                 {/* MIDDLE */}
 
-                <View style={{marginLeft: '8%', marginBottom:'40%'}}>{/*refactor height using marginBottom*/}
+                <View style={{marginLeft: '8%', marginBottom:'10%'}}>{/*refactor height using marginBottom*/}
                     <Text style={styles.WelcomeText}>   보통 누구랑 같이 가나요?</Text>
                     <Text style={styles.subText}>       *중복 선택 가능</Text>
                     <View style={{backgroundColor: '#888888', width:'100%', height:1, marginVertical:BannerWidth*(0.05)}} />

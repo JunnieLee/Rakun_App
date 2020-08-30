@@ -75,8 +75,8 @@ function MyTabs() {
 
 export default function TestPage() {
     return (
-        <NavigationContainer>
+
             <MyTabs />
-        </NavigationContainer>
+
     );
 }
