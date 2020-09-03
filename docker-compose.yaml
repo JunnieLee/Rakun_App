@@ -1,0 +1,46 @@
+version: '3.6'
+services:
+  # postgres:
+  #   image: postgres:12
+  #   restart: always
+  #   volumes:
+  #   - db_data:/var/lib/postgresql/data
+  #   environment:
+  #     POSTGRES_PASSWORD: rakun1dev!
+  graphql-engine:
+    image: hasura/graphql-engine:v1.2.2
+    ports:
+      - "8000:8080"
+    # depends_on:
+    # - "postgres"
+    restart: always
+    environment:
+      # temporarily added - 회원가입 등등 하기 전까지만
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
+      # temporarily added
+      HASURA_GRAPHQL_DATABASE_URL: postgresql://postgres:rakun1dev!@rakun-database.cf5ia98gzzum.us-east-2.rds.amazonaws.com:5432/postgres
+      #HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@postgres:5432/postgres
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
+      HASURA_GRAPHQL_ADMIN_SECRET: muse@2020
+      HASURA_GRAPHQL_JWT_SECRET: '{
+        "type":"RS256",
+        "jwk_url": "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com",
+        "audience": "rakun-f8bb3",
+        "issuer": "https://securetoken.google.com/rakun-f8bb3"
+      }'
+        # rakun-dashboard:
+        #   container_name: rakun-dashboard
+        #   build:
+        #     context: .
+        #     dockerfile: Dockerfile
+        #   volumes:
+        #     - ".:/app"
+        #     - "/app/node_modules"
+        #   ports:
+        #     - "3001:3000"
+        #   environment:
+        #     - NODE_ENV=development
+
+volumes:
+  db_data:

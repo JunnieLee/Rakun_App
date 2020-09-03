@@ -1,6 +1,7 @@
 import React, { useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, ScrollView,
     TouchableWithoutFeedback, KeyboardAvoidingView, Dimensions, StatusBar,TextInput,Keyboard} from 'react-native';
+import HideWithKeyboard from 'react-native-hide-with-keyboard';
 
 import GoBack from '~assets/icons/drawable/goback.svg';
 
@@ -62,8 +63,12 @@ const LogInPage = ({props, navigation}) => {
                 {/* BOTTOM */}
             <View>
 
-                <View style={{ width: '30%', alignContent:'flex-end',
+                <HideWithKeyboard>
+                <View style={{ width: '35%', alignContent:'flex-end',
                                 marginHorizontal: BannerWidth*(0.1), marginBottom: BannerWidth*(0.05)}}>
+                    <TouchableOpacity onPress={()=>{ }}>
+                        <Text style={styles.subText}>아이디 / 비밀번호 찾기</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={()=>{navigation.push('Join')}}>
                         <Text style={styles.subText}>회원가입</Text>
                     </TouchableOpacity>
@@ -71,6 +76,7 @@ const LogInPage = ({props, navigation}) => {
                         <Text style={styles.subText}>둘러보기</Text>
                     </TouchableOpacity>
                 </View>
+                </HideWithKeyboard>
 
 
                 {Email!=''&&Password!=''?
@@ -117,7 +123,7 @@ const styles = StyleSheet.create({
         fontStyle: "normal",
         letterSpacing: 0,
         color: "#888888",
-        marginVertical: BannerWidth*(0.02),
+        marginVertical: BannerWidth*(0.015),
     },
     ErrorText:{
         fontFamily: "AppleSDGothicNeo",

@@ -28,7 +28,7 @@ const InitialEntryPage = ({props, navigation}) => {
 
                     <Text style={styles.JoinAndLookAroundText}> | </Text>
 
-                    <TouchableOpacity onPress={()=>{}}>
+                    <TouchableOpacity onPress={()=>{navigation.push('Main')}}>
                     <Text style={styles.JoinAndLookAroundText}> 둘러보기 </Text>
                     </TouchableOpacity>
 

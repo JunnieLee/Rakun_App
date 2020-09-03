@@ -89,7 +89,7 @@ const App = () => {
   const [scrollY, setY] = useState(0);
 
   return (
-      <ApolloProvider client={client}>
+
         <NavigationContainer>
       <StatusBar barStyle="dark-content" backgroundColor={'transparent'} translucent={true}/>
 
@@ -107,7 +107,7 @@ const App = () => {
            {/*<My_BasicPage /> */}
            {/* <GenreDetailPage/>*/}
 
-            <EventDetailPage scrollY={scrollY}/>
+
 
         </ScrollView>
 
@@ -118,7 +118,7 @@ const App = () => {
 
           </SafeAreaView>
         </NavigationContainer>
-      </ApolloProvider>
+
       );
 };
 

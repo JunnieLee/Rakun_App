@@ -11,9 +11,16 @@ const BannerWidth = Dimensions.get('window').width;
 const ItemWidth = BannerWidth*(0.73)*(0.5);
 const iconSize = BannerWidth*(1/3)*(1/8);
 
+
+
+// 얘가 지금 이 유저가 찜한 앤지 아닌지는 여기서 정보 받아와서 보여주자!!
+// 찜하고 그거 반영하는것도 따로!
+
+// key, image, title, date, rating, E_rating, likes, navigation
+
 const GenreItem = (props) => {
 
-    const [heartFilled, setheartFilled] = useState(true); // for heart
+    const [heartFilled, setheartFilled] = useState(true); // for heart // 이 정보는 관계 DB부분으로!
 
     return (
         <View style={styles.product}>
@@ -27,6 +34,7 @@ const GenreItem = (props) => {
                             rating:props.rating,
                             title: props.title,
                             date: props.date // 나중엔 해당 item의 key값만 받아오면 되겠지!
+                            // 얘는 일단 나중에!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         }
                     });
                 }}>
@@ -34,7 +42,7 @@ const GenreItem = (props) => {
                 </TouchableOpacity>
             </View>
 
-            <View style={{ marginHorizontal: 3 }}>
+            <View style={{ marginHorizontal: 3, width: ItemWidth*(0.95) }}>
 
                 <TouchableOpacity onPress={()=>{
                     props.navigation.push('EventDetail', {
@@ -45,6 +53,7 @@ const GenreItem = (props) => {
                             rating:props.rating,
                             title: props.title,
                             date: props.date // 나중엔 해당 item의 key값만 받아오면 되겠지!
+                            // 얘는 일단 나중에!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                         }
                     });
                 }}>
@@ -79,14 +88,14 @@ const styles = StyleSheet.create({
         // paddingHorizontal:'1%',
         backgroundColor: 'white',
         marginBottom: 10,
-        width: ItemWidth
+        width: ItemWidth*(0.95)
     },
 
     imageContainer: {
         width: ItemWidth, //'30%', // 그니까 나머지 글 등등은 75%
         height: ItemWidth,
         overflow: 'hidden',
-        marginVertical: 10
+        // marginVertical: 10
     },
 
     image: {

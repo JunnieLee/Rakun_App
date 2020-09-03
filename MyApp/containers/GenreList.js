@@ -2,7 +2,12 @@
 import {ScrollView, StyleSheet, Text, View} from "react-native";
 import React from "react";
 
+import { useQuery } from "@apollo/react-hooks";
+// import GET_EVENT_DATA from '~DBdata/EventsListView/EventDataWithListView';
+
 import GenreItem from ".././components/Items/GenreItem";
+
+import gql from "graphql-tag";
 
 
 // props --> image, title, date, rating, likes
@@ -60,45 +65,78 @@ var ItemLikes= [
     0
 ];
 
+/*
+const GET_EVENT_DATA = gql`
+  query MyQuery($genreId: Int!) {
+      performances(genreId: $genreId) {
+        name
+        id
+        genreId
+        startDate
+        endDate
+        hearts
+        expected_ratings
+        posterUrl
+        total_ratings
+        performance_favorites {
+          user {
+            id
+          }
+        }
+      }
+}
+`;
+*/
+
+const GET_EVENT_DATA = gql`
+  query MyQuery {
+      performances(limit: 15, where: {genreId: {_eq: 1}}) {
+        name
+        id
+        genreId
+        startDate
+        endDate
+        expected_ratings
+        posterUrl
+        total_ratings
+      }
+}
+`;
+//         performance_favorites {
+//           user {
+//             id
+//           }
+//         }
 
 const GenreList = (props) => {
 
-    var Items = [];
+    const { loading, error, data } = useQuery(GET_EVENT_DATA, {
+        // variables: { ['genreId']: props.genreId},
+        notifyOnNetworkStatusChange: true,
+        // pollInterval: 500, - to mimic real-time
+    });
 
-    for(let i = 0; i < ItemImage.length; i+=2){
-        Items.push(
-            <View key = {i} style={{ flexDirection: 'row'}}>
-                <GenreItem
-                    image = {ItemImage[i]}
-                    title = {ItemTitle[i]}
-                    date = {ItemDate[i]}
-                    rating = {ItemRating[i]}
-                    likes = {ItemLikes[i]}
-                    navigation = {props.navigation}
-                />
-                <GenreItem
-                    image = {ItemImage[i+1]}
-                    title = {ItemTitle[i+1]}
-                    date = {ItemDate[i+1]}
-                    rating = {ItemRating[i+1]}
-                    likes = {ItemLikes[i+1]}
-                    navigation = {props.navigation}
-                />
-            </View>
-        )
-    }
+    if (loading) return <Text>Loading...</Text>;
+    if (error) return <Text>Error!{error.message}</Text>;
 
     return (
         <View style={styles.container}>
-            <ScrollView>
-
-                { Items }
-                { Items }
-
-                <View style={{ marginVertical: 50, backgroundColor: 'white'}} />
-                <Text> ... Updating the page ...</Text>
-                <View style={{ marginVertical: 100, backgroundColor: 'white'}} />
-
+            <ScrollView contentContainerStyle={{flexWrap: 'wrap', flexDirection: 'row'}}>
+                {data.performances.map(({ id, posterUrl, name, endDate, total_ratings, expected_ratings, performance_favorites }) => (
+                    <GenreItem
+                        key = {id}
+                        image = {posterUrl}
+                        title = {name}
+                        date = {'~' + endDate}
+                        rating = {total_ratings}
+                        E_rating = {expected_ratings}
+                        likes = {ItemLikes[0]}
+                        // likes = {performance_favorites.length}
+                        navigation = {props.navigation}
+                    />
+                ))
+                }
+                <View style={{height: 300}}/>
             </ScrollView>
         </View>
     );
@@ -107,6 +145,7 @@ const GenreList = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        // backgroundColor:'yellow'
         //paddingVertical: '4%'
     }
 });

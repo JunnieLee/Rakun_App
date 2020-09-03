@@ -11,6 +11,7 @@ import Join from '~screens/Auth/Join/JoinStack';
 import SplashScreen from 'react-native-splash-screen';
 
 
+
 const Stack = createStackNavigator();
 
 function InitEntryStack() {
@@ -28,14 +29,14 @@ function InitEntryStack() {
     }, []);
 
     return (
-        <NavigationContainer>
-        <Stack.Navigator initialRouteName="Initial" headerMode='none'>
-            <Stack.Screen name="Initial" component={InitialEntryPage} />
-            <Stack.Screen name="LogIn" component={LogIn} />
-            <Stack.Screen name="Join" component={Join} />
-            <Stack.Screen name="Main" component={Main} />
-        </Stack.Navigator>
-        </NavigationContainer>
+            <NavigationContainer>
+            <Stack.Navigator initialRouteName="Initial" headerMode='none'>
+                <Stack.Screen name="Initial" component={InitialEntryPage} />
+                <Stack.Screen name="LogIn" component={LogIn} />
+                <Stack.Screen name="Join" component={Join} />
+                <Stack.Screen name="Main" component={Main} />
+            </Stack.Navigator>
+            </NavigationContainer>
     );
 }
 

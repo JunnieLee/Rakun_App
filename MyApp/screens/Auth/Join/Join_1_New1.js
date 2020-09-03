@@ -1,6 +1,7 @@
 import React, { useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, ScrollView,
     TouchableWithoutFeedback, KeyboardAvoidingView, Dimensions, StatusBar,TextInput,Keyboard} from 'react-native';
+import HideWithKeyboard from 'react-native-hide-with-keyboard';
 
 import GoBack from '~assets/icons/drawable/goback.svg';
 
@@ -105,8 +106,10 @@ const Join_1_New1 = ({props, navigation}) => {
 
 
                     {/* BOTTOM */}
+
                     <View>
 
+                        <HideWithKeyboard>
                         <View style={{ alignContent:'flex-end',
                             marginLeft: BannerWidth*(0.05), marginBottom: BannerWidth*(0.05)}}>
 
@@ -151,6 +154,7 @@ const Join_1_New1 = ({props, navigation}) => {
                                 </Text>
                             </View>
                         </View>
+                        </HideWithKeyboard>
 
 
                         {Email!=='' && Password!=='' && ConfirmPassword!=='' && ConsentFirst &&

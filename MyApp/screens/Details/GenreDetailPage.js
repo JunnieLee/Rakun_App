@@ -29,7 +29,8 @@ const GenreDetailPage =  ({route, navigation}) => {
                 </TouchableOpacity>
             </View>
             <View style={{ width: '73%'}}>
-                <GenreList navigation={navigation}/>
+                {/* genreName에 따라 genreId 분류해서 props로 넘겨주기!!*/}
+                <GenreList navigation={navigation} genreId={1}/>
             </View>
         </ScrollView>
         </View>
