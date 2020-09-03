@@ -8,7 +8,7 @@ import FilledStar from '../.././assets/icons/drawable/icon_full_star.svg';
 import EmptyStar from '../.././assets/icons/drawable/icon_empty_star.svg';
 
 const BannerWidth = Dimensions.get('window').width;
-const ItemWidth = BannerWidth*(0.73)*(0.5);
+const ItemWidth = BannerWidth*(0.72)*(0.5);
 const iconSize = BannerWidth*(1/3)*(1/8);
 
 
@@ -42,7 +42,7 @@ const GenreItem = (props) => {
                 </TouchableOpacity>
             </View>
 
-            <View style={{ marginHorizontal: 3, width: ItemWidth*(0.95) }}>
+            <View style={{ marginHorizontal: 3, width: ItemWidth*(0.98), marginTop: 5, }}>
 
                 <TouchableOpacity onPress={()=>{
                     props.navigation.push('EventDetail', {
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         // paddingHorizontal:'1%',
         backgroundColor: 'white',
         marginBottom: 10,
-        width: ItemWidth*(0.95)
+        width: ItemWidth
     },
 
     imageContainer: {
@@ -111,8 +111,9 @@ const styles = StyleSheet.create({
         padding: 10
     },
     title: {
+        marginVertical: 3,
         fontFamily: "AppleSDGothicNeo",
-        fontSize: 14,
+        fontSize: iconSize*(0.95), //14
         fontWeight: "500",
         fontStyle: "normal",
         letterSpacing: 0,
@@ -121,7 +122,7 @@ const styles = StyleSheet.create({
     date: {
         width: '100%',
         fontFamily: "AppleSDGothicNeo",
-        fontSize: 14,
+        fontSize: iconSize*(0.85), //14
         fontWeight: "normal",
         fontStyle: "normal",
         letterSpacing: 0,
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
     },
     ratingText: {
         fontFamily: "AppleSDGothicNeo",
-        fontSize: 12,
+        fontSize: iconSize*(0.8), // 12,
         fontWeight: "normal",
         fontStyle: "normal",
         letterSpacing: 0,

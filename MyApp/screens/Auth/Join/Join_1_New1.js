@@ -1,9 +1,10 @@
 import React, { useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, ScrollView,
     TouchableWithoutFeedback, KeyboardAvoidingView, Dimensions, StatusBar,TextInput,Keyboard} from 'react-native';
-import HideWithKeyboard from 'react-native-hide-with-keyboard';
+import { HideWithKeyboard, ShowWithKeyboard } from 'react-native-hide-with-keyboard';
 
 import GoBack from '~assets/icons/drawable/goback.svg';
+import DownIcon from '~assets/icons/drawable/down.svg';
 
 const BannerWidth = Dimensions.get('window').width;
 
@@ -157,6 +158,11 @@ const Join_1_New1 = ({props, navigation}) => {
                         </HideWithKeyboard>
 
 
+                        <ShowWithKeyboard>
+                            <View style={{ justifyContent:'center', alignItems:'center', marginVertical: BannerWidth*(0.03)}}>
+                                <DownIcon width={BannerWidth*(0.06)} height={BannerWidth*(0.05)}/>
+                            </View>
+                        </ShowWithKeyboard>
                         {Email!=='' && Password!=='' && ConfirmPassword!=='' && ConsentFirst &&
                             RightPasswordType && Password===ConfirmPassword ?
                             <TouchableOpacity style={{ width:'100%', height: BannerWidth*(0.13), justifyContent:'center',

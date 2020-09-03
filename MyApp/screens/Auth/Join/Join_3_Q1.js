@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity, ScrollView,
     TouchableWithoutFeedback, KeyboardAvoidingView, Dimensions, StatusBar,TextInput,Keyboard} from 'react-native';
 
 import GoBack from '~assets/icons/drawable/goback.svg';
+import Progress1 from '~assets/icons/drawable/progress_1.svg';
 
 const BannerWidth = Dimensions.get('window').width;
 
@@ -51,7 +52,8 @@ const Join_3_Q1 = ({props, navigation}) => {
                 {/* MIDDLE */}
 
                 <View style={{marginLeft: '8%', marginBottom:'40%'}}>{/*refactor height using marginBottom*/}
-                    <Text style={styles.WelcomeText}>   Q. 성별이 뭔가요?</Text>
+                    <Progress1/>
+                    <Text style={styles.WelcomeText}>성별이 뭔가요?</Text>
                     <View style={{backgroundColor: '#888888', width:'100%', height:1, marginVertical:BannerWidth*(0.05)}} />
                     <View style={{flexDirection:'row', justifyContent:'space-between', marginRight: '8%'}}>
                         {/* list of buttons should go in here*/}
@@ -101,6 +103,7 @@ const Join_3_Q1 = ({props, navigation}) => {
 
 const styles = StyleSheet.create({
     WelcomeText:{
+        marginTop: BannerWidth*(0.04),
         fontFamily: "AppleSDGothicNeo",
         fontSize: BannerWidth*(0.045),
         fontWeight: "normal",

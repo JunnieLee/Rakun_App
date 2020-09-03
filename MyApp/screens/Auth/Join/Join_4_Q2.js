@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity, ScrollView,
     TouchableWithoutFeedback, KeyboardAvoidingView, Dimensions, StatusBar,TextInput,Keyboard} from 'react-native';
 
 import GoBack from '~assets/icons/drawable/goback.svg';
+import Progress2 from '~assets/icons/drawable/progress_2.svg';
 
 const BannerWidth = Dimensions.get('window').width;
 
@@ -66,7 +67,7 @@ const Join_4_Q2 = ({props, navigation}) => {
 
                     </View>
 
-                    <View style={{height:BannerWidth*(0.05)}}/>
+
                     <View style={{marginLeft: '8%'}}>
                         {/* CODE GOES HERE*/}
                         <Text style={styles.WelcomeText}>
@@ -78,8 +79,9 @@ const Join_4_Q2 = ({props, navigation}) => {
                 {/* MIDDLE */}
 
                 <View style={{marginLeft: '8%', marginBottom:'10%'}}>{/*refactor height using marginBottom*/}
-                    <Text style={styles.WelcomeText}>   보통 누구랑 같이 가나요?</Text>
-                    <Text style={styles.subText}>       *중복 선택 가능</Text>
+                    <Progress2/>
+                    <Text style={styles.WelcomeText}>보통 문화/예술 활동은 누구와 함께 하나요?</Text>
+                    <Text style={styles.subText}>  *중복 선택 가능</Text>
                     <View style={{backgroundColor: '#888888', width:'100%', height:1, marginVertical:BannerWidth*(0.05)}} />
                     <View style={{flexDirection:'row', justifyContent:'space-between', marginRight: '8%', flexWrap: 'wrap'}}>
                         {/* list of buttons should go in here*/}
@@ -126,6 +128,7 @@ const Join_4_Q2 = ({props, navigation}) => {
 
 const styles = StyleSheet.create({
     WelcomeText:{
+        marginTop: BannerWidth*(0.04),
         fontFamily: "AppleSDGothicNeo",
         fontSize: BannerWidth*(0.045),
         fontWeight: "normal",

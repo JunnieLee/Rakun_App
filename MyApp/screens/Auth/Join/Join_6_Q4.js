@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, KeyboardAvoidingView, Dimensions, StatusBar} from 'react-native';
 
 import GoBack from '~assets/icons/drawable/goback.svg';
+import Progress4 from '~assets/icons/drawable/progress_4.svg';
 
 const BannerWidth = Dimensions.get('window').width;
 
@@ -86,10 +87,8 @@ const Join_6_Q4 = ({props, navigation}) => {
                                           style={{ flexDirection:'row', marginHorizontal:'5%', alignItems:'center'}}>
                             <GoBack/>
                         </TouchableOpacity>
-
                     </View>
 
-                    <View style={{height:BannerWidth*(0.05)}}/>
                     <View style={{marginLeft: '8%'}}>
                         {/* CODE GOES HERE*/}
                         <Text style={styles.WelcomeText}>
@@ -101,8 +100,9 @@ const Join_6_Q4 = ({props, navigation}) => {
                 {/* MIDDLE */}
 
                 <View style={{marginLeft: '8%', marginBottom:'3%'}}>{/*refactor height using marginBottom*/}
-                    <Text style={styles.WelcomeText}>   좋아하는 키워드를 선택해주세요.</Text>
-                    <Text style={styles.subText}>       *중복 선택 가능</Text>
+                    <Progress4/>
+                    <Text style={styles.WelcomeText}>좋아하는 키워드를 선택해주세요.</Text>
+                    <Text style={styles.subText}>  *중복 선택 가능</Text>
                     <View style={{backgroundColor: '#888888', width:'100%', height:1, marginVertical:BannerWidth*(0.05)}} />
                     <View style={{flexDirection:'row', justifyContent:'space-between', marginRight: '8%', flexWrap: 'wrap'}}>
                         {/* list of buttons should go in here*/}
@@ -149,6 +149,7 @@ const Join_6_Q4 = ({props, navigation}) => {
 
 const styles = StyleSheet.create({
     WelcomeText:{
+        marginTop: BannerWidth*(0.04),
         fontFamily: "AppleSDGothicNeo",
         fontSize: BannerWidth*(0.045),
         fontWeight: "normal",

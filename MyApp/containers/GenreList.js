@@ -88,9 +88,11 @@ const GET_EVENT_DATA = gql`
 `;
 */
 
+
+// 1- 연극, 2-뮤지컬, 3-무용, 4- 오케스트라 ?, 5- 오페라...? , 6- 판소리...? 8...
 const GET_EVENT_DATA = gql`
   query MyQuery {
-      performances(limit: 15, where: {genreId: {_eq: 1}}) {
+      performances(limit: 15, where: {genreId: {_eq: 2}}) { 
         name
         id
         genreId
@@ -127,7 +129,7 @@ const GenreList = (props) => {
                         key = {id}
                         image = {posterUrl}
                         title = {name}
-                        date = {'~' + endDate}
+                        date = {'~ ' + endDate}
                         rating = {total_ratings}
                         E_rating = {expected_ratings}
                         likes = {ItemLikes[0]}
