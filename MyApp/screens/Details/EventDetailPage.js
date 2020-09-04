@@ -5,6 +5,10 @@ import { useNavigation } from '@react-navigation/native';
 import GoBack from '~assets/icons/drawable/goback.svg';
 import Share from '~assets/icons/drawable/share.svg';
 
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+
+
 import BlackStarFilled from '~assets/icons/drawable/blackstarfilled.svg';
 
 //import BlackStarFilled from '~assets/icons/drawable/hellostar.svg';
@@ -24,8 +28,8 @@ const iconSize = BannerWidth*(1/25);
 
 
 // temporary hard-coded data --> gotta work on this one later one!
-const place = "블루스퀘어 인터파크홀";
-const expected_rating = 3.9;
+// const place = "블루스퀘어 인터파크홀";
+// const expected_rating = 3.9;
 const editorsComment = '영국의 전설적인 뮤지컬 작곡가 앤드루 로이드 웨버의 작품이자, ' +
     '세계 4대 뮤지컬 중 하나. 파리 오페라 하우스를 배경으로 펼쳐지는 사랑과 집착의 이야기.' +
     '특유의 샹들리에 신은 공연의 백미. 집중의 끈을 놓지 마세요!';
@@ -34,20 +38,82 @@ const tips = '연출    |  라이너 프리드\n' +
     '작가    |  가스통 르두';
 
 
+// editorsComment, tips, place 관련 정보도 같이 가져오깅!! review 정보도 같이 가져와야겠넹
+// casting도??
+
+
+const GET_EVENT_DATA = gql`
+  query MyQuery($ID:Int) {
+      performances(where: {id: {_eq:$ID}} ) {
+        name
+        id
+        genreId
+        startDate
+        endDate
+        expected_ratings
+        posterUrl
+        total_ratings
+        performance_favorites {
+            id
+        }
+        theater {
+            name
+        }
+      }
+}
+`;
+
+/*
+const GET_EVENT_DATA = gql`
+  query MyQuery {
+      performances(where: {id: {_eq:45}} ) {
+        name
+        id
+        genreId
+        startDate
+        endDate
+        expected_ratings
+        posterUrl
+        total_ratings
+        performance_favorites {
+            id
+        }
+        theater {
+            name
+        }
+      }
+}
+`;
+*/
+
+
 const EventDetailPage = ({props, route}) =>{
 
-    const navigation = useNavigation();
-
-    const { title } = route.params;
-    const { image } = route.params;
-    const { rating } = route.params;
-    const { date } = route.params;
-
-    const {MyRecNav} = route.params; // 어떻게 사용할 것인가????????
-
-
-    const [heartFilled, setheartFilled] = useState(false); // for heart
     const[headerText, setheaderText] = useState(''); // 상단 제목 넣어야할때 사용
+
+    const navigation = useNavigation();
+    const { ID } = route.params; // 작품 id
+
+    const { loading, error, data } = useQuery(GET_EVENT_DATA, {
+        variables: {ID},
+        notifyOnNetworkStatusChange: true,
+        // pollInterval: 500, - to mimic real-time
+    });
+
+
+    if (loading) return <Text>Loading...</Text>;
+    if (error) return <Text>Error!{error.message}</Text>;
+
+    const performance = data.performances[0];
+
+    const image = performance.posterUrl;
+    const title = performance.name;
+    const date = performance.startDate + ' ~ ' + performance.endDate;
+    const rating = performance.total_ratings;
+    const expected_rating = performance.expected_ratings;
+    const place = performance.theater.name;
+
+
 
         return (
             <View style={{backgroundColor:'white', paddingTop: Platform.OS === 'android' ? 25 : 0 }}>

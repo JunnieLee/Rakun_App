@@ -29,13 +29,7 @@ const GenreItem = (props) => {
                     props.navigation.push('EventDetail', {
                         screen: 'EventDetailPage',
                         tabBarVisible: false,
-                        params: {
-                            image: props.image,
-                            rating:props.rating,
-                            title: props.title,
-                            date: props.date // 나중엔 해당 item의 key값만 받아오면 되겠지!
-                            // 얘는 일단 나중에!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        }
+                        params: { ID: props.ID }
                     });
                 }}>
                 <Image style={styles.image} source={{ uri: props.image }}/>
@@ -48,13 +42,7 @@ const GenreItem = (props) => {
                     props.navigation.push('EventDetail', {
                         screen: 'EventDetailPage',
                         tabBarVisible: false,
-                        params: {
-                            image: props.image,
-                            rating:props.rating,
-                            title: props.title,
-                            date: props.date // 나중엔 해당 item의 key값만 받아오면 되겠지!
-                            // 얘는 일단 나중에!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        }
+                        params: {ID: props.ID }
                     });
                 }}>
                     <Text style={styles.title}>{props.title}</Text>
@@ -72,7 +60,7 @@ const GenreItem = (props) => {
 
                     <View style={{ marginLeft:'8%', flexDirection:'row'}}>
                         <FilledStar width={iconSize+6} height={iconSize}/>
-                        <Text style={styles.ratingText}>{props.rating}  예상별점</Text>
+                        <Text style={styles.ratingText}>{props.rating} 예상별점</Text>
                     </View>
                 </View>
 

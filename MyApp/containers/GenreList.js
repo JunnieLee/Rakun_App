@@ -14,47 +14,6 @@ import gql from "graphql-tag";
 
 // temporary hardcoded data
 
-var ItemImage = [
-    'https://user-images.githubusercontent.com/33515577/89978689-12ba3b80-dca9-11ea-87f2-d8c919104ff8.png',
-    'https://user-images.githubusercontent.com/33515577/90023228-73b83280-dcee-11ea-82b1-d325ca688cf3.png',
-    'https://user-images.githubusercontent.com/33515577/90023316-90546a80-dcee-11ea-9ba3-491df9cc5f45.png',
-
-    'https://user-images.githubusercontent.com/33515577/89978689-12ba3b80-dca9-11ea-87f2-d8c919104ff8.png',
-    'https://user-images.githubusercontent.com/33515577/90023228-73b83280-dcee-11ea-82b1-d325ca688cf3.png',
-    'https://user-images.githubusercontent.com/33515577/90023316-90546a80-dcee-11ea-9ba3-491df9cc5f45.png'
-
-];
-
-var ItemTitle = [
-    '오페라의 유령',
-    '귀환 (그날의 약속)',
-    'Horizon of Axis',
-
-    '오페라의 유령',
-    '귀환 (그날의 약속)',
-    'Horizon of Axis'
-];
-
-var ItemDate = [
-    '~2020.08.08',
-    '~2020.08.08',
-    '~2020.08.08',
-
-    '~2020.08.08',
-    '~2020.08.08',
-    '~2020.08.08'
-];
-
-var ItemRating= [
-    4.5,
-    2,
-    3.5,
-
-    4,
-    2.5,
-    5
-];
-
 var ItemLikes= [
     4,
     9,
@@ -92,7 +51,7 @@ const GET_EVENT_DATA = gql`
 // 1- 연극, 2-뮤지컬, 3-무용, 4- 오케스트라 ?, 5- 오페라...? , 6- 판소리...? 8...
 const GET_EVENT_DATA = gql`
   query MyQuery {
-      performances(limit: 15, where: {genreId: {_eq: 2}}) { 
+      performances(limit: 20, where: {genreId: {_eq: 2}}) { 
         name
         id
         genreId
@@ -101,14 +60,13 @@ const GET_EVENT_DATA = gql`
         expected_ratings
         posterUrl
         total_ratings
+        performance_favorites {
+            id
+         }
       }
 }
 `;
-//         performance_favorites {
-//           user {
-//             id
-//           }
-//         }
+
 
 const GenreList = (props) => {
 
@@ -127,13 +85,13 @@ const GenreList = (props) => {
                 {data.performances.map(({ id, posterUrl, name, endDate, total_ratings, expected_ratings, performance_favorites }) => (
                     <GenreItem
                         key = {id}
+                        ID = {id}
                         image = {posterUrl}
                         title = {name}
                         date = {'~ ' + endDate}
                         rating = {total_ratings}
                         E_rating = {expected_ratings}
-                        likes = {ItemLikes[0]}
-                        // likes = {performance_favorites.length}
+                        likes = {performance_favorites.length}
                         navigation = {props.navigation}
                     />
                 ))
