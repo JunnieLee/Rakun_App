@@ -13,6 +13,21 @@ import {
 
 import MagazineItem from '~screens/Magazine/MagazineItem';
 
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+import GenreItem from "../../containers/GenreList";
+
+const GET_DATA = gql`
+    query MyQuery {
+              magazines {
+                author
+                caption_summary
+                created_at
+                id
+                title
+              }
+          }
+`;
 
 // temporary hard-coded data
 const MagazineContents=[
@@ -95,28 +110,36 @@ const BannerWidth = Dimensions.get('window').width;
 
 const SubMagazineList = (props) => {
 
-    var Items = [];
-    for(let i = 0; i < MagazineContents.length; i++){
-        Items.push(
-            <View key = {i}>
-                <MagazineItem
-                    img = {MagazineContents[i].img}
-                    author = {MagazineContents[i].author}
-                    title = {MagazineContents[i].title}
-                    abstract = {MagazineContents[i].abstract}
-                    date = {MagazineContents[i].date}
-                    duration = {MagazineContents[i].duration}
-                    imgContainerStyle = {MagazineContents[i].imgContainerStyle}
-                    navigation = {props.navigation}
-                />
-                <View style={{ width :'100%', height:1, backgroundColor:"#a98c66", marginVertical: BannerWidth*(0.06)}}/>
-            </View>
-        )
-    }
+    const { loading, error, data } = useQuery(GET_DATA, {
+        notifyOnNetworkStatusChange: true,
+        // pollInterval: 500, - to mimic real-time
+    });
+
+    if (loading) return <Text>Loading...</Text>;
+    if (error) return <Text>Error!{error.message}</Text>;
+
+    var i = 1 ;
 
     return(
         <View>
-            {Items}
+            {data.magazines.map(({ author, caption_summary, created_at, id, title }) => (
+                <View key = {i}>
+                    <MagazineItem
+                        ID = {id}
+                        img = {MagazineContents[i%7].img} // 수정하도록!!!!!!!!!!!!!1
+                        author = {author}
+                        title = {title.substring(0,22)} // 일단 임시로 이렇게 해놓음!!
+                        abstract = {caption_summary.length > 53 ? caption_summary.substring(0,54):caption_summary} // 일단 임시로 이렇게 해놓음!!
+                        date = {created_at.substring(0,10)}
+                        duration = {MagazineContents[i%7].duration} // 수정하도록!!!!!!!!!!!!!1
+                        imgContainerStyle = {MagazineContents[(i++)%7].imgContainerStyle} // 수정하도록!!!!!!!!!!!!!1
+                        navigation = {props.navigation}
+                    />
+                    <View style={{ width :'100%', height:1, backgroundColor:"#a98c66", marginVertical: BannerWidth*(0.06)}}/>
+                </View>
+            ))
+            }
+            <View style={{height:100}}/>
         </View>
     );
 }

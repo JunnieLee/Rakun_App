@@ -33,33 +33,23 @@ const MagazineItem = (props) => {
     return (
         <View style={styles.product}>
             <View style={ImageBoxStyle}>
-                <TouchableOpacity onPress={()=>{
-                    navigation.push('MagazineDetail', {key:2222});
-                }}>
+                <TouchableOpacity onPress={()=>{navigation.push('MagazineDetail', {ID:props.ID});}}>
                     <Image style={styles.image} source={{ uri: props.img }}/>
                 </TouchableOpacity>
             </View>
+
             <View style={styles.details}>
                 <View style={styles.titleContainer}>
-                    <TouchableOpacity onPress={()=>{
-                        navigation.push('MagazineDetail', {key:2222});
-                    }}>
+                    <TouchableOpacity onPress={()=>{navigation.push('MagazineDetail', {ID:props.ID});}}>
                         <Text style={styles.title}>{props.title}</Text>
                     </TouchableOpacity>
                 </View>
-
-                <View style={{ marginRight: '15%', marginTop:BannerWidth*(0.01)}}>
-                    <Text style={styles.abstractStyle}>
-                        {props.abstract}
-                    </Text>
-
-                    <Text style={styles.detailText}>
-                        by. {props.author} | {props.date} | {props.duration}분 소요
-                    </Text>
-
+                <View style={{ marginRight: '6%', marginTop:BannerWidth*(0.01)}}>
+                    <Text style={styles.abstractStyle}>{props.abstract}</Text>
+                    <Text style={styles.detailText}>by. {props.author} | {props.date} | {props.duration}분 소요</Text>
                 </View>
-
             </View>
+
         </View>
 
     );
@@ -70,6 +60,7 @@ const styles = StyleSheet.create({
     product: {
         backgroundColor: 'white',
         height: BannerWidth*(0.6),
+        // flex: 1,
         marginBottom:BannerWidth*(0.01)
     },
     imageContainer1: {
@@ -100,7 +91,8 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         flexDirection:'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginRight: '10%'
     },
     title: {
         fontFamily: "AppleSDGothicNeo",

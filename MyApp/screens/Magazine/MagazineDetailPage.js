@@ -3,8 +3,11 @@ import {View, Text, Dimensions, Image, StatusBar, ScrollView, StyleSheet} from '
 
 import AutoHeightImage from 'react-native-auto-height-image';
 
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
 
-import body from '~screens/Magazine/MagazineDetailInfo';
+
+// import body from '~screens/Magazine/MagazineDetailInfo';
 
 const BannerWidth = Dimensions.get('window').width;
 
@@ -25,8 +28,41 @@ const caption_full = '올해는 베토벤 탄생 250주년입니다. 전설적�
 // type=="header-two"이면 소제목
 // type=="unstyled"면 일반텍스트
 
-const MagazineDetailPage = (props) => {
 
+const GET_DATA = gql`
+  query MyQuery($ID:Int) {
+          magazines(where: {id: {_eq:$ID}}) {
+            author
+            caption_full
+            content
+            created_at
+            id
+            title
+          }
+}
+`;
+
+
+
+const MagazineDetailPage = ({props, route}) => {
+
+    const { ID } = route.params; // 작품 id
+    const { loading, error, data } = useQuery(GET_DATA, {
+        variables: {ID},
+        notifyOnNetworkStatusChange: true,
+        // pollInterval: 500, - to mimic real-time
+    });
+
+    if (loading) return <Text>Loading...</Text>;
+    if (error) return <Text>Error!{error.message}</Text>;
+
+    const magazine = data.magazines[0];
+
+    // 요 아래부터 이제 coding 시작~~
+    // -----------------------------------------------------------------------------------------------
+
+
+    const body = JSON.parse(magazine.content);
 
     const content_view = [];
     // 종류 = 이미지, 소제목, 텍스트
@@ -68,16 +104,16 @@ const MagazineDetailPage = (props) => {
             <View style={{ backgroundColor: 'white', position: 'absolute',
                             top: BannerWidth*(0.85), zIndex:10, marginLeft:'8%'}}>
                 <View style={{ margin: BannerWidth*(0.07)}}>
-                    <Text style={styles.TitleText}>{title}</Text>
+                    <Text style={styles.TitleText}>{magazine.title}</Text>
                     <Text style={styles.detailText}>
-                        by. {author} | {date} | {duration}분 소요
+                        by. {magazine.author} | {magazine.created_at.substring(0,10)} | {duration}분 소요
                     </Text>
-                    <Text style={styles.captionText}>{caption_full}</Text>
+                    <Text style={styles.captionText}>{magazine.caption_full}</Text>
                 </View>
             </View>
-            <View style={{height:300}}/>
+            <View style={{height:200}}/>
             <View>{content_view}</View>
-            <View style={{height:100}}/>
+            <View style={{height:50}}/>
 
         </ScrollView>
     );
