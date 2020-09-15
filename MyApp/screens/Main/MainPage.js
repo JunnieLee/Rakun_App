@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import {
     View,
     Text,
@@ -24,6 +24,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import GenreDetailPage from '.././Details/GenreDetailPage';
 
 
+// import firebase from 'react-native-firebase';
+import auth from '@react-native-firebase/auth';
+
 const BannerWidth = Dimensions.get('window').width;
 
 function GenreDetailScreen({ navigation }) {
@@ -36,6 +39,20 @@ function GenreDetailScreen({ navigation }) {
 }
 
 const MainPageHelper = ({props, navigation}) => {
+
+    const [currentUser, setcurrentUser] = useState(null);
+
+    /*
+    useEffect(() => {
+        const { mycurrentUser } = auth();
+        setcurrentUser({ mycurrentUser });
+    });
+    */
+    // --> commented out due to the error below
+    // Maximum update depth exceeded.
+    // This can happen when a component calls setState inside useEffect,
+    // but useEffect either doesn't have a dependency array,
+    // or one of the dependencies changes on every render.
 
     const [isVisible, setisVisible] = useState(false);
 

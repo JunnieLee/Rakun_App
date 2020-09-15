@@ -7,17 +7,19 @@ import {
     TouchableOpacity,
     Dimensions,
     Modal,
-    SafeAreaView, ScrollView
+    SafeAreaView, ScrollView, Alert
 } from 'react-native';
 
 import My_EditProfilePage from './My_EditProfilePage';
+
+import auth from '@react-native-firebase/auth';
 
 const BannerWidth = Dimensions.get('window').width;
 
 const profileImage = 'https://user-images.githubusercontent.com/33515577/90604014-26304e00-e237-11ea-8aa8-304f67730bc8.png';
 var nickname = '쭌쭌';
 
-const MY_BasicPage =  props => {
+const MY_BasicPage =  ({props, navigation}) => {
 
     const [isVisible, setisVisible] = useState(false);
     const openEditView = () => setisVisible(isVisible => isVisible = (!isVisible));
@@ -71,7 +73,12 @@ const MY_BasicPage =  props => {
 
     var bottom =(
         <View style={{ alignItems: 'center', bottom:'3%' }}>
-            <TouchableOpacity onPress={()=>{}}>
+            <TouchableOpacity onPress={()=>{
+                auth()
+                    .signOut()
+                    .then(() => Alert.alert('User signed out!'));
+                navigation.navigate('Initial');
+            }}>
                 <Text style={styles.LogoutText}>로그아웃</Text>
             </TouchableOpacity>
         </View>

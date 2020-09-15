@@ -8,7 +8,13 @@ import InitialEntryPage from '~screens/Auth/InitialEntryPage';
 import LogIn from '~screens/Auth/LogIn/LogInPage';
 import Join from '~screens/Auth/Join/JoinStack';
 
+
+
 import SplashScreen from 'react-native-splash-screen';
+
+
+// import firebase from 'react-native-firebase';
+import auth from '@react-native-firebase/auth';
 
 
 
@@ -22,11 +28,15 @@ function InitEntryStack() {
     }, []);
     */
 
+
     useEffect(() => {
+
         setTimeout(() => {
             SplashScreen.hide();
         }, 1000);
+
     }, []);
+
 
     return (
             <NavigationContainer>

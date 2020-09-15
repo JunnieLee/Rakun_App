@@ -1,10 +1,13 @@
 import React, { useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, ScrollView,
+import {View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert,
     TouchableWithoutFeedback, KeyboardAvoidingView, Dimensions, StatusBar,TextInput,Keyboard} from 'react-native';
 import { HideWithKeyboard, ShowWithKeyboard } from 'react-native-hide-with-keyboard';
 
 import GoBack from '~assets/icons/drawable/goback.svg';
 import DownIcon from '~assets/icons/drawable/down.svg';
+
+// import firebase from 'react-native-firebase';
+import auth from '@react-native-firebase/auth';
 
 const BannerWidth = Dimensions.get('window').width;
 
@@ -14,6 +17,31 @@ const LogInPage = ({props, navigation}) => {
     const [Password, setPassword] = useState('');
 
     const [Incorrect, setIncorrect] = useState(false); // 이메일, 비밀번호 오류 시 빨간색 오류 메세지 띄워주기 위함
+
+    const [errorMessage, seterrorMessage] = useState(null);
+
+    const handleLogIn = () => {
+
+            Alert.alert("handleLogIn function invoked!");
+
+            auth()
+            .signInWithEmailAndPassword(Email, Password)
+            .then(() => {
+                Alert.alert("Successfully Logged In!");
+                navigation.navigate('Main');
+            })
+            .catch(error => Alert.alert(
+                "LogIn Error!",
+                error.message,
+                [
+                    {
+                        text: "Cancel",
+                        style: "cancel"
+                    }
+                ],
+                { cancelable: false }
+            ) ); //seterrorMessage({ errorMessage: error.message }))
+    }
 
 
     return(
@@ -86,7 +114,9 @@ const LogInPage = ({props, navigation}) => {
                 </ShowWithKeyboard>
                 {Email!=''&&Password!=''?
                     <TouchableOpacity style={{ width:'100%', height: BannerWidth*(0.13), justifyContent:'center',
-                        alignItems:'center', backgroundColor:"#4d5c6f"}}>
+                                                alignItems:'center', backgroundColor:"#4d5c6f"}}
+                                      onPress={()=>{handleLogIn()}}
+                    >
                         <Text style={styles.ButtonText}>로그인</Text>
                     </TouchableOpacity>
                     :

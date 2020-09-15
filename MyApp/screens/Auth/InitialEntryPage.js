@@ -1,11 +1,24 @@
-import React, { useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions, Image, StatusBar} from 'react-native';
 
 import RakunLogo from '~assets/icons/drawable/rakunlogo';
 
+// import firebase from 'react-native-firebase';
+import auth from '@react-native-firebase/auth';
+
 const BannerWidth = Dimensions.get('window').width;
 
 const InitialEntryPage = ({props, navigation}) => {
+
+    //-------- 일단은 comment out 함 ---------//
+    /*
+    useEffect(() => {
+        auth().onAuthStateChanged(user => {
+            navigation.navigate(user ? 'Main' : 'Initial')
+        })
+    });
+    */
+
     return(
       <View style={{width:'100%', height:'100%'}}>
           <StatusBar barStyle="light-content" backgroundColor={'transparent'} translucent={true}/>

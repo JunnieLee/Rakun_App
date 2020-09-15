@@ -1,6 +1,5 @@
 import 'react-native-gesture-handler';
 
-import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -21,12 +20,31 @@ import FocusedMyRec from '~assets/icons/drawable/icon_myrec_focused.svg';
 import FocusedRakun from '~assets/icons/drawable/icon_myrakun_focused.svg';
 
 
+import React, {useState, useEffect} from "react";
+// import firebase from "react-native-firebase";
+import auth from '@react-native-firebase/auth';
 
 // 여기에 loading splash page 만들기!!
 
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
+
+    const [currentUser, setcurrentUser] = useState(null);
+
+    /*
+    useEffect(() => {
+        const { mycurrentUser } = auth();
+        setcurrentUser({ mycurrentUser });
+    });
+    */
+    // --> commented out due to the error below
+    // Maximum update depth exceeded.
+    // This can happen when a component calls setState inside useEffect,
+    // but useEffect either doesn't have a dependency array,
+    // or one of the dependencies changes on every render.
+
+
     return (
         <Tab.Navigator
             initialRouteName="Home"

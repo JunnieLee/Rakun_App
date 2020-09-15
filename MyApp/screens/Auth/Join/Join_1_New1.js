@@ -1,7 +1,12 @@
 import React, { useState} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, ScrollView,
-    TouchableWithoutFeedback, KeyboardAvoidingView, Dimensions, StatusBar,TextInput,Keyboard} from 'react-native';
+import {
+    View, Text, StyleSheet, TouchableOpacity, ScrollView,
+    TouchableWithoutFeedback, KeyboardAvoidingView, Dimensions, StatusBar, TextInput, Keyboard, Alert
+} from 'react-native';
 import { HideWithKeyboard, ShowWithKeyboard } from 'react-native-hide-with-keyboard';
+
+// import firebase from 'react-native-firebase';
+import auth from '@react-native-firebase/auth';
 
 import GoBack from '~assets/icons/drawable/goback.svg';
 import DownIcon from '~assets/icons/drawable/down.svg';
@@ -23,6 +28,41 @@ const Join_1_New1 = ({props, navigation}) => {
     const [ConsentSecond, setConsentSecond] = useState(false);
     const [ConsentThird, setConsentThird] = useState(false);
 
+    const handleSignUp = () => {
+        auth()
+        .createUserWithEmailAndPassword(Email, Password)
+        .then(() => {
+            Alert.alert("Successfully created an account!");
+            navigation.push('New2');
+        })
+        .catch(error => Alert.alert(
+            "Join Error!",
+            error.message,
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel"
+                }
+            ],
+            { cancelable: false }
+        ) )
+
+        /*
+        Alert.alert('Is handling signup working..?');
+
+        try {
+            let response = await auth().createUserWithEmailAndPassword(Email, Password)
+            if (response) {
+                console.log("🍎", response);
+                Alert.alert("Successfully created an account!");
+                navigation.push('New2');
+            }
+        } catch (e) {
+            console.error(e.message)
+            Alert.alert(e.message);
+        }
+        */
+    }
 
 
     return(
@@ -167,7 +207,7 @@ const Join_1_New1 = ({props, navigation}) => {
                             RightPasswordType && Password===ConfirmPassword ?
                             <TouchableOpacity style={{ width:'100%', height: BannerWidth*(0.13), justifyContent:'center',
                                                         alignItems:'center', backgroundColor:"#4d5c6f"}}
-                                              onPress={()=>{navigation.push('New2')}}
+                                              onPress={()=>{ handleSignUp();}}
                             >
                                 <Text style={styles.ButtonText}>다음</Text>
                             </TouchableOpacity>
