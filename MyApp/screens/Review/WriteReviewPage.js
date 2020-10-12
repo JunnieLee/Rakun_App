@@ -284,7 +284,7 @@ const WriteReviewPage = ({props,route}) => {
                             placeholder={
                                 ' \n'+
                                 '    자유롭게 감상평을 남겨주세요. \n' +
-                            '    혼자만 간직하고 싶다면 비공개 체크를 하시면 돼요. :)'}
+                            '    혼자만 간직하고 싶다면  ‘나만 보기’를 체크 해주세요. :)'}
                             placeholderTextColor={"#9c9c9c"}
                             multiline={true}
                             textAlignVertical={'top'}
@@ -299,7 +299,7 @@ const WriteReviewPage = ({props,route}) => {
                                     style={{ alignSelf: "center" }}
 
                                 />
-                                <Text style={styles.checkBoxText}>스포 포함</Text>
+                                <Text style={styles.checkBoxText}>스포일러 포함</Text>
                             </View>
                             <View style={{width:'50%', flexDirection:'row'}}>
                                 <CheckBox
